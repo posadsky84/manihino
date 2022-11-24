@@ -1,0 +1,7 @@
+.playerslist {
+
+    background-color: turquoise;
+    box-sizing: border-box;
+    grid-area: pl;
+
+}

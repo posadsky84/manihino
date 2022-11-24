@@ -1,0 +1,66 @@
+.rating {
+    display: flex;
+    flex-direction: column;
+    //background-color: wheat;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 2%;
+
+
+}
+
+.headrow,
+.tabrow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 4px;
+}
+
+.tabrow {
+    margin-top: 2px;
+}
+
+
+
+.gamename {
+  background-color: cornsilk;
+  background-blend-mode: soft-light;
+    display: flex;
+    justify-content: flex-start !important;
+}
+
+.cntheader {
+
+}
+
+.cntitem {
+
+}
+
+.playerheader {
+   font-weight: bold;
+   color: indigo;
+}
+
+.score {
+
+}
+
+.boxik {
+    //border-style: dotted;
+    border-width: thin;
+    width: 100px;  /* Или что угодно */
+    height: 30px; /* Или что угодно */
+    margin: auto;  /* Магия! */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.boxik:first-child {
+    width: 25%;
+}

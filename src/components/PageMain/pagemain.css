@@ -1,0 +1,7 @@
+.pagemain {
+    grid-area: m;
+    //background-color: ;
+    background-image: url("gamepack.jpg");
+    background-size: cover;
+
+}
