@@ -1,18 +1,20 @@
 import './App.css';
 import Header from "./components/header/header";
-import Subheader from "./components/subheader/subheader";
 import Footer from "./components/footer/footer";
 import PageMain from "./components/PageMain/pagemain";
+import { Route, Routes } from 'react-router-dom';
+import PageFullStory from "./components/PageFullStory/pageFullStoryAPI";
 
 const App = () => {
   return (
+
     <div className="app-wrapper">
-
       <Header />
-      <Subheader />
-      <PageMain />
+      <Routes>
+        <Route element={<PageMain />} path="/" />
+        <Route element={<PageFullStory />} path="/fullStory" />
+      </Routes>
       <Footer />
-
     </div>
   );
 }

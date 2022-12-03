@@ -1,5 +1,11 @@
 .otherheader {
 
-    grid-area: oh;
+}
 
+.nav-header {
+
+}
+
+.link-header {
+ padding: 20px;
 }

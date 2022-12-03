@@ -1,12 +1,22 @@
+import { API } from "../api";
 
 
 const SET_RATING = "SET_RATING";
-export const setRatingAC = (rating) => ({type: SET_RATING, rating});
+const setRating = (rating) => ({type: SET_RATING, rating});
 
 
 const initState = {
   items: []
 };
+
+export const setRatingThunk = () => {
+  return async dispatch => {
+
+      const response = await API.getRating();
+      dispatch(setRating(response.data));
+
+  }
+}
 
 const RatingReducer = (state = initState, action) => {
 

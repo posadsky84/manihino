@@ -1,0 +1,27 @@
+/* Точно такой же стиль, как у соседней страницы.
+Надо сделать общий задник
+*/
+
+.page-fullStory {
+    display: flex;
+    flex-direction: column;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 2%;
+}
+
+.fullStory-headerline {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.fullStory-headerblock {
+    border-style: solid;
+    margin: 1px;
+}
+
+.fullStory-headerplayer {
+    border-style: solid;
+    margin: 1px;
+}

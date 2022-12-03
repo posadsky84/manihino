@@ -1,8 +1,10 @@
 import "./rating.css";
 import {connect} from "react-redux";
 import React from 'react';
-import {setRatingAC} from "../../../redux/rating-reducer";
-import axios from "axios";
+import {setRatingThunk} from "../../../redux/rating-reducer";
+import { API } from "../../../api";
+
+
 
 const mapStateToProps = (state) => {
   return {
@@ -11,18 +13,25 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setRating: (rating) => dispatch(setRatingAC(rating))
-  }
-}
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     setRating: (rating) => dispatch(setRatingAC(rating))
+//   }
+// }
+//
+
 
 class Rating extends React.Component {
+
+  // tempGet = async () => {
+  //   const response = await API.getRating();
+  //   this.props.setRating(response.data);
+  // }
 
   componentDidMount() {
 
     if (this.props.rating.items.length === 0) {
-        axios.get("http://localhost:4000/rating").then(response => this.props.setRating(response.data));
+      this.props.setRatingThunk();
     }
 
   }
@@ -57,4 +66,6 @@ class Rating extends React.Component {
 
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(Rating);
+export default connect(mapStateToProps,{
+  setRatingThunk,
+})(Rating);
