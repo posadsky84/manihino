@@ -2,7 +2,6 @@ import "./rating.css";
 import {connect} from "react-redux";
 import React from 'react';
 import {setRatingThunk} from "../../../redux/rating-reducer";
-import { API } from "../../../api";
 
 
 
@@ -13,20 +12,7 @@ const mapStateToProps = (state) => {
   }
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     setRating: (rating) => dispatch(setRatingAC(rating))
-//   }
-// }
-//
-
-
 class Rating extends React.Component {
-
-  // tempGet = async () => {
-  //   const response = await API.getRating();
-  //   this.props.setRating(response.data);
-  // }
 
   componentDidMount() {
 

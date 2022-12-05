@@ -8,20 +8,59 @@
     padding-left: 15%;
     padding-right: 15%;
     padding-top: 2%;
+
+
 }
 
-.fullStory-headerline {
+.fullStory-headerline, .fullStory-line {
   display: flex;
   flex-direction: row;
-
 }
 
-.fullStory-headerblock {
+
+
+.fullStory-headerblock{
     border-style: solid;
     margin: 1px;
 }
 
-.fullStory-headerplayer {
+.bl {
+    border: 1px dashed grey;
+    margin: 1px;
+}
+
+.fullStory-headerblock:first-child {
+    width: 300px;
+}
+
+.fullStory-headerblock:nth-child(2) {
+    width: 100px;
+}
+
+.fullStory-headerblock:last-child {
+    width: 300px;
+}
+
+.bl:first-child {
+    width: 300px;
+}
+
+.bl:nth-child(2) {
+    width: 100px;
+}
+
+.bl:last-child {
+    width: 300px;
+}
+
+.rrr {
+    width: 100px;
+    border: 1px dashed grey;
+    margin: 1px;
+}
+
+.fullStory-headerplayer{
+    width: 100px;
     border-style: solid;
     margin: 1px;
 }

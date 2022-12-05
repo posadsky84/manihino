@@ -1,6 +1,7 @@
 .playerslist {
 
-    background-color: turquoise;
+
     box-sizing: border-box;
+    border-style: dotted;
 
 }

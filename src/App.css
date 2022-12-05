@@ -1,15 +1,17 @@
 .app-wrapper {
     display: flex;
     flex-direction: column;
-    padding: 10px;
+
+    background-image: url("gamepack.jpg");
+    background-size: cover;
+    background-attachment: fixed;
 
 
-
-
-
-    width: 1200px;
     height: 100vh;
-    margin: auto;
 
+}
 
+.main-area {
+    overflow-y: scroll;
+    height: 100%;
 }

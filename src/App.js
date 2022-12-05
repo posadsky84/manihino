@@ -9,12 +9,14 @@ const App = () => {
   return (
 
     <div className="app-wrapper">
-      <Header />
-      <Routes>
-        <Route element={<PageMain />} path="/" />
-        <Route element={<PageFullStory />} path="/fullStory" />
-      </Routes>
-      <Footer />
+      <Header/>
+      <div className="main-area">
+        <Routes>
+          <Route element={<PageMain/>} path="/"/>
+          <Route element={<PageFullStory/>} path="/fullStory"/>
+        </Routes>
+      </div>
+      <Footer/>
     </div>
   );
 }

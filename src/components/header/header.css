@@ -1,10 +1,8 @@
 .header {
 
-    background-color: antiquewhite;
 
     display: grid;
-    grid-template-areas:
-       "pl oh";
-    grid-template-columns: 20fr 80fr;
-
+    grid-template-columns: 200px 1fr;
+    column-gap: 40px;
+    height: 120px;
 }
