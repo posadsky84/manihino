@@ -1,0 +1,67 @@
+.page-calendar {
+    display: flex;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 2%;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+}
+
+.month {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-style: solid;
+    border-color: darkgray;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+}
+
+.month-card {
+    display: grid;
+    grid-template-columns: repeat(7, auto);
+
+}
+
+.day {
+    height: 11px;
+    width: 11px;
+    margin: 2px;
+    border: 1px solid rgb(27, 31, 35, 0.06);
+    outline-offset: -1px;
+    background-color: #ebedf0;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.day:hover {
+    background-color: lightgrey;
+}
+
+.day.selected {
+
+}
+
+.day.with-plays {
+
+}
+
+.no-day {
+    visibility: hidden;
+}
+
+.label-month {
+    font-size: 10px;
+    color: black;
+    margin-bottom: 5px;
+}
+
+.day-history {
+
+}
+
