@@ -10,7 +10,10 @@ export const API = {
   getRating() {
     return instance.get(`/rating`);
   },
-  getFullStory() {
-    return instance.get(`/fullStory`);
+  getFullStory(season, gameId, ddate) {
+    return instance.get(`/playsDetailed`, {params: {season, gameId, ddate}});
+  },
+  getCalendar(season) {
+    return instance.get(`/calendar?season=${season}`);
   }
 };

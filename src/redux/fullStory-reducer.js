@@ -3,9 +3,9 @@ import { API } from "../api";
 const SET_FULLSTORY = `SET_FULLSTORY`;
 
 const setFullStory = (list) => ({type: SET_FULLSTORY, list});
-export const getFullStoryThunk = () => {
+export const getFullStoryThunk = season => {
   return async dispatch => {
-    const response = await API.getFullStory();
+    const response = await API.getFullStory(season);
     dispatch(setFullStory(response.data));
   }
 }

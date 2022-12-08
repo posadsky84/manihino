@@ -6,7 +6,8 @@ import React from "react";
 
 const mapStateToProps = (state) => {
   return {
-    fullStory: state.fullStory
+    fullStory: state.fullStory,
+    ui: state.ui,
   }
 }
 
@@ -15,7 +16,7 @@ class PageFullStoryAPI extends React.Component {
 
 
 componentDidMount() {
-  this.props.getFullStoryThunk();
+  this.props.getFullStoryThunk(this.props.ui.season);
 }
 
 
