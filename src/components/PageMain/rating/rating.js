@@ -7,7 +7,7 @@ import {setRatingThunk} from "../../../redux/rating-reducer";
 
 const mapStateToProps = (state) => {
   return {
-    playerList: state.playerList,
+    players: state.players.items,
     rating: state.rating,
   }
 };
@@ -32,7 +32,7 @@ class Rating extends React.Component {
         <div className="headrow">
           <div className="boxik" />
           <div className="cntheader boxik">Кол-во</div>
-          {this.props.playerList.items.map(({name}) => <div className="playerheader boxik">{name}</div>)}
+          {this.props.players.map(({name}) => <div className="playerheader boxik">{name}</div>)}
         </div>
         {this.props.rating.items.map((i) => (
           <div className="tabrow">

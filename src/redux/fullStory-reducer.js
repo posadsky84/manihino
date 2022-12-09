@@ -5,7 +5,7 @@ const SET_FULLSTORY = `SET_FULLSTORY`;
 const setFullStory = (list) => ({type: SET_FULLSTORY, list});
 export const getFullStoryThunk = season => {
   return async dispatch => {
-    const response = await API.getFullStory(season);
+    const response = await API.getPlaysDetailed(season);
     dispatch(setFullStory(response.data));
   }
 }

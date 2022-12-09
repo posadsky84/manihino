@@ -4,27 +4,17 @@ import {connect} from "react-redux";
 
 const mapStateToProps = (state) => {
   return {
-    playerList: state.playerList
+    players: state.players.items
   }
-
 };
 
-const mapDispatchToProps = (dispatch) => {
-
-  return {};
-
-}
-
-
-
-const PlayersList = ({playerList}) => {
-  //setTimeout(() => {playerList.players.push({name: "Вася епт"})}, 5000);
+const PlayersList = ({players}) => {
   return (
     <div className="playerslist">
-      {playerList.items.map(({name}) => <div>{name}</div>)}
+      {players.map(({name}) => <div>{name}</div>)}
     </div>
   );
 
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(PlayersList);
+export default connect(mapStateToProps)(PlayersList);

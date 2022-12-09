@@ -6,11 +6,19 @@ const SET_CALENDAR = `SET_CALENDAR`;
 const initState = {
   data: {},
   selectedDay: null,
-  dayHistory: []
+  dayHistory: [],
 };
 
-export const selectDay = selectedDay => ({type: SELECT_DAY, selectedDay});
+const selectDay = (selectedDay, dayHistory) => ({type: SELECT_DAY, selectedDay, dayHistory});
 const setCalendar = calendar => ({type: SET_CALENDAR, calendar});
+
+export const selectDayThunk = selectedDay => async dispatch => {
+  let response = await API.getPlaysDetailed(null, null,
+    `'${selectedDay.getFullYear()}-${selectedDay.getMonth()}-${selectedDay.getDate()}'`);
+  if (response.status === 200) {
+    return dispatch(selectDay(selectedDay, response.data[0]?.plays || []));
+  }
+};
 
 export const getCalendarThunk = season => async dispatch => {
   let response = await API.getCalendar(season);
@@ -26,6 +34,7 @@ const calendarReducer = (state = initState, action) => {
       return {
         ...state,
         selectedDay: action.selectedDay,
+        dayHistory: action.dayHistory,
       };
     }
     case SET_CALENDAR: {
