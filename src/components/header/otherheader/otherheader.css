@@ -1,47 +1,36 @@
 .other-header {
- display: flex;
- flex-direction: row; /* может по-умолчанию */
- height: 60px;
- margin-top: auto;
+    display: flex;
+    flex-direction: row; /* может по-умолчанию */
+    height: 60px;
+    margin-top: auto;
 
 }
 
 .link-header {
- display: block;
- border-color: red;
- padding: 10px;
- margin-right: 20px;
- text-decoration: none;
- text-transform: uppercase;
- color: darkblue;
- font-size: 18px;
- border-radius: 4px;
- line-height: 38px;
+    display: block;
+    border-color: red;
+    padding: 10px;
+    margin-right: 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: darkblue;
+    font-size: 18px;
+    border-radius: 4px;
+    line-height: 38px;
 
 }
 
 .link-header.active {
- background-color: rgba(255,255,255,.8);
+    background-color: rgba(255, 255, 255, .8);
 }
 
 .link-header:hover {
- background-color: lemonchiffon;
+    background-color: lemonchiffon;
 }
 
-
-
-
-
-
-.link-header-черновик {
- padding: 20px;
- text-align: center;
- text-decoration: none;
- text-transform: uppercase;
- color: purple;
- font-size: 18px;
- line-height: 14px;
- vertical-align: middle;
- border-radius: 4px;
+.post-new-play-link {
+    margin-right: 200px;
+    margin-left: auto;
 
 }
+
