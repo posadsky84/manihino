@@ -20,5 +20,8 @@ export const API = {
   },
   getPlayers() {
     return instance.get(`/players`);
-  }
+  },
+  addPlay(data) {
+    return instance.post(`/addPlay`, data);
+  },
 };

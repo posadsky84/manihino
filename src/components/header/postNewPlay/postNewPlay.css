@@ -70,14 +70,45 @@
     margin-top: 4px;
 }
 
+/* не исп?*/
 .player-line {
     display: flex;
     padding: 2px;
 
 }
 
+.player-raw {
+    dipslay: flex;
+    margin-top: 8px;
+    margin-bottom: 16px;
+}
+
 .player-label {
     margin-left: 10px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    height: 20px; /* identical to box height, or 125% */
+    color: #222425;
+    width: 100px;
+}
+
+.player-score {
+    width: 100px;
+    height: 36px;
+    background: #F6F7F8;
+    border: 1px solid #EEF0F1;
+    border-radius: 4px;
+    padding-left: 12px;
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #222425;
+
 }
 
 .post-new-play-button {
