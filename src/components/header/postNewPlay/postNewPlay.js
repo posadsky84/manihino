@@ -6,6 +6,7 @@ import ru from 'date-fns/locale/ru';
 import { Formik, Form, Field, ErrorMessage, FieldArray, useFormikContext } from "formik";
 import { useCallback, useRef, useEffect, useState } from "react";
 import React from "react";
+import WinnerIcon from "./winnerIcon";
 
 registerLocale('ru', ru);
 
@@ -22,10 +23,9 @@ const initialValues = {
   comment: "",
   played: [true, true, false, true],
   scores: [10, 12, 14, 16],
-  winner: "2",
+  winner: 2,
 };
 const onSubmit = values => {
-
 
 
   const data = {
@@ -57,23 +57,31 @@ const PlayersArea = ({ players }) => {
   useEffect(() => {
     const curWinner = formikProps.values.scores.indexOf(Math.max(...formikProps.values.scores)) + 1;
     formikProps.setFieldValue("winner", `${curWinner}`);
-  }, [formikProps.values.scores])
+  }, [formikProps.values.scores]);
+
+  //TODO Нужно завернуть в useCallback
+  const uncheckOnClick = (e, itemId) => {
+    if (+formikProps.values.winner === +itemId) {
+      e.preventDefault();
+      formikProps.setFieldValue("winner", "0");
+    }
+  }
 
 
-  return  <>
+  return <>
     {players.map((item) =>
       <div key={`raw${item.id}`} className="player-raw">
-        <input type="checkbox" checked={true} />
+        <input type="checkbox" checked={true}/>
         <div className="player-label">{item.name}</div>
-        <Field className="player-score" name={`scores[${item.id - 1}]`} type="number" />
-        <Field type="radio" name={`winner`} id={item.id} value={`${item.id}`} />
-        <label className="post-new-play-label" htmlFor={item.id}>{item.name}</label>
+        <Field className="player-score" name={`scores[${item.id - 1}]`} type="number"/>
+        <label className={`radio-label ${+formikProps.values.winner === +item.id ? "selected" : ""}`} htmlFor={item.id} onClick={(e) => uncheckOnClick(e, item.id)}>
+          <WinnerIcon isSelected={+formikProps.values.winner === +item.id}/>
+        </label>
+        <Field type="radio" name={`winner`} id={item.id} value={`${item.id}`}/>
       </div>
     )
     }</>;
 }
-
-
 
 
 const PostNewPlay = ({ players, setShowModal }) => {
@@ -113,7 +121,7 @@ const PostNewPlay = ({ players, setShowModal }) => {
                 <ErrorMessage name="gameId"/>
               </div>
             </div>
-            <PlayersArea players={players} />
+            <PlayersArea players={players}/>
             <div className="post-new-play-input-block">
               <label className="post-new-play-label" htmlFor="comment">Комментарий</label>
               <Field
@@ -124,9 +132,7 @@ const PostNewPlay = ({ players, setShowModal }) => {
               />
             </div>
 
-            <button type="submit" className="post-new-play-button"
-            >Добавить
-            </button>
+            <button type="submit" className="post-new-play-button">Добавить</button>
           </Form>
         </Formik>
       </div>
@@ -134,7 +140,6 @@ const PostNewPlay = ({ players, setShowModal }) => {
   );
 
 }
-
 
 
 function useOnClickOutside(ref, handler) {

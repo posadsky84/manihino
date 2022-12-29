@@ -99,33 +99,84 @@
 
 .day-history-line {
     display: flex;
-    border: dashed;
-    padding: 5px;
+
 }
 
 .player-name-cell {
     width: 60px;
+    background-color: #FF6B00;
+    border-radius: 4px 4px 0 0;
+    margin: 0  1px;
+    font-size: 14px;
+    text-align: center;
 }
 
 .game-name-cell {
     width: 200px;
+    background-color: white;
+    margin-right: 1px;
+    font-size: 14px;
+    padding-left: 4px;
+    padding-top: 2px;
 }
 
 .score-cell {
+    position: relative;
     width: 60px;
+    margin: 0 1px;
+    text-align: center;
+    font-size: 14px;
+    background-color: white;
+    padding-top: 2px;
+}
+
+.score-cell.winner::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 4px;
+    width: 10px;
+    height: 4px;
+    border-radius: 1px;
+    border-left: 4px solid #e145a3;
+    border-bottom: 4px solid #e145a3;
+    transform: rotate(-45deg);
+}
+
+.day-history-line:last-child .game-name-cell {
+    padding-bottom: 6px;
+    border-bottom-left-radius: 4px;
+}
+
+.day-history-line:nth-child(2) .game-name-cell {
+    padding-top: 4px;
+    border-top-left-radius: 4px;
+}
+
+.day-history-line:last-child .score-cell:last-of-type {
+    border-bottom-right-radius: 4px;
 }
 
 .score-cell.winner {
-  border: dotted;
 }
 
-.comment-cell {
-    width: 300px;
+.span-counts {
+    color: red;
+    font-size: 10px;
+    margin-left: 4px;
+
 }
 
-.counts-cell {
-    width: 40px;
+
+
+.span-comment {
+    margin-left: 20px;
+    font-size: 14px;
+    background-color: antiquewhite;
+    white-space: nowrap;
 }
+
+
 
 .hid {
     visibility: hidden;

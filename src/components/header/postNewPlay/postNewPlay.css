@@ -61,6 +61,41 @@
     margin-bottom: 4px;
 }
 
+.radio-label {
+    display: block;
+    height: 32px;
+    width: 32px;
+    border: 1px solid #B4BCC0;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 16px;
+
+}
+
+.radio-label.selected {
+    background-color: #FF6B00;
+    border-color: #FF6B00;
+}
+
+.radio-label + input[type="radio"] {
+    display: none;
+}
+
+.winner-icon {
+    width: 20px;
+    height: 20px;
+    fill: #B4BCC0;
+}
+
+.winner-icon.selected {
+    fill: white;
+
+}
+
+.winner-icon path {
+    fill: red;
+}
+
 .post-new-play-error {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
@@ -78,9 +113,10 @@
 }
 
 .player-raw {
-    dipslay: flex;
+    display: flex;
     margin-top: 8px;
     margin-bottom: 16px;
+    align-items: center;
 }
 
 .player-label {

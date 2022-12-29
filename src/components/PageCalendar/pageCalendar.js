@@ -34,21 +34,20 @@ const PageCalendar = ({ season, selectDay, calendar, selectedDay, dayHistory, pl
         <div className="day-history">
           <div className="day-history-line">
             <div className="hid game-name-cell" />
-            <div className="hid counts-cell" />
             {players.map(({name}) => <div className="player-name-cell">{name}</div>)}
-            <div className="hid comment-cell" />
+            {/*<div className="hid comment-cell" />*/}
           </div>
             {dayHistory.map((dayItem) => (
               <div className="day-history-line">
-                <div className="game-name-cell">{dayItem.gameName}</div>
-                <div className="counts-cell">{dayItem.counts}</div>
+                <div className="game-name-cell">{dayItem.gameName}{!dayItem.counts && <span className="span-counts">вне зачета</span>}</div>
                 {players.map(playersItem => {
                     //Если не нашлось, то падает
                     const scoreItem = dayItem.results.find((resItem) => resItem.playerId === playersItem.id);
                     return <div className={scoreItem?.winner ? "score-cell winner" : "score-cell"}>{scoreItem?.score}</div>;
                 })
+
                 }
-                <div className="comment-cell">{dayItem.comment}</div>
+                <span className="span-comment">{dayItem.comment}</span>
               </div>))
 
             }

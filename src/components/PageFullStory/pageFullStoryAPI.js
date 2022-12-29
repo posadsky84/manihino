@@ -8,6 +8,7 @@ const mapStateToProps = (state) => {
   return {
     fullStory: state.fullStory,
     ui: state.ui,
+    players: state.players.items,
   }
 }
 
@@ -21,7 +22,7 @@ componentDidMount() {
 
 
   render () {
-  return <PageFullStory fullStory={this.props.fullStory}/>;
+  return <PageFullStory fullStory={this.props.fullStory} players={this.props.players}/>;
 
 }
 

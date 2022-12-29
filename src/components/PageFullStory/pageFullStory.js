@@ -3,7 +3,7 @@ import "./pageFullStory.css";
 
 
 
-const PageFullStory = ({fullStory}) => {
+const PageFullStory = ({fullStory, players}) => {
 
 
 return (
@@ -16,12 +16,7 @@ return (
         <div className="ddate-header">{item.ddate}</div>
           <div className="fullStory-headerline">
             <div className="fullStory-headerblock">Игра</div>
-            <div className="fullStory-headerblock">Зачет</div>
-            <div className="fullStory-headerplayer">Леха1</div>
-            <div className="fullStory-headerplayer">Леха2</div>
-            <div className="fullStory-headerplayer">Леха3</div>
-            <div className="fullStory-headerplayer">Леха4</div>
-            <div className="fullStory-headerblock">Коммент</div>
+            {players.map(({name}) => <div className="fullStory-headerplayer">{name}</div>)}
           </div>
             {item.plays.map((item) => {
 
