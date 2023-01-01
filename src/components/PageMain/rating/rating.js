@@ -27,24 +27,14 @@ class Rating extends React.Component {
     return(
 
     <div className="rating">
-
-      <div className="ВсяТабла">
-        <div className="headrow">
-          <div className="boxik" />
-          <div className="cntheader boxik">Кол-во</div>
-          {this.props.players.map(({name}) => <div className="playerheader boxik">{name}</div>)}
-        </div>
         {this.props.rating.items.map((i) => (
-          <div className="tabrow">
-            <div className="boxik gamename">{i.game_name}</div>
-            <div className="cntitem boxik">{i.cnt}</div>
-            {i.results.map(({wins}) => <div className="score boxik">{+wins || ""}</div>)}
+          <div className="tabrow ">
+            <div className="gamename">
+              {i.game_name}<span className="cnt-span">{i.cnt}</span>
+            </div>
+            {i.results.map(({wins}) => <div className="score">{+wins || ""}</div>)}
           </div>
           ))}
-
-      </div>
-
-
     </div>
   )};
 

@@ -1,10 +1,13 @@
 .rating {
     display: flex;
     flex-direction: column;
-    //background-color: wheat;
-    padding-left: 15%;
-    padding-right: 15%;
-    padding-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+    margin-top: 2%;
+    width: 100%;
+    font-size: 16px;
+
 
 
 }
@@ -13,10 +16,10 @@
 .tabrow {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: stretch;
     justify-content: flex-start;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 4px;
+    background-color: #EEF0F1;
+    border-radius: 2px;
 }
 
 .tabrow {
@@ -26,18 +29,24 @@
 
 
 .gamename {
-  background-color: cornsilk;
-  background-blend-mode: soft-light;
-    display: flex;
-    justify-content: flex-start !important;
+    padding-left: 24px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    width: 300px;
+
+
+    /*justify-content: flex-start !important;*/
 }
 
 .cntheader {
 
 }
 
-.cntitem {
+.cnt-span {
+    margin-left: 6px;
 
+    color: #B4BCC0;
+    font-style: italic;
 }
 
 .playerheader {
@@ -46,12 +55,16 @@
 }
 
 .score {
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    box-shadow: -1px 0 0 0 #FF6B00;
+    margin: 5px 0;
+    flex-basis: 0;
 }
 
 .boxik {
-    //border-style: dotted;
-    border-width: thin;
     width: 100px;  /* Или что угодно */
     height: 30px; /* Или что угодно */
     margin: auto;  /* Магия! */

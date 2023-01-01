@@ -1,5 +1,5 @@
 const initState = {
-  season: new Date().getFullYear()
+  season: new Date().getFullYear() - 1
 };
 
 const uiReducer = (state = initState, action) => {

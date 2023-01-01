@@ -1,8 +1,16 @@
 .header {
 
+    background-color: white;
+    display: flex;
+    height: 80px;
+    align-items: center;
+    justify-content: space-between;
 
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    column-gap: 40px;
-    height: 120px;
 }
+
+.site-logo {
+    margin-top: 26px;
+    margin-bottom: 26px;
+    margin-left: 48px;
+}
+

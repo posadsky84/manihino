@@ -1,31 +1,47 @@
 .other-header {
     display: flex;
-    flex-direction: row; /* может по-умолчанию */
-    height: 60px;
-    margin-top: auto;
-
+    flex-direction: row;
 }
 
 .link-header {
+    position: relative;
     display: block;
-    border-color: red;
-    padding: 10px;
-    margin-right: 20px;
+    margin-right: 52px;
     text-decoration: none;
-    text-transform: uppercase;
-    color: darkblue;
+    padding-bottom: 4px;
+
+    color: #676D71;
+
+    line-height: 1.2;
     font-size: 18px;
-    border-radius: 4px;
-    line-height: 38px;
+    font-weight: 700;
+
+    overflow: hidden;
 
 }
 
 .link-header.active {
-    background-color: rgba(255, 255, 255, .8);
+    color: #222425;
 }
 
-.link-header:hover {
-    background-color: lemonchiffon;
+.link-header::after {
+    position: absolute;
+    content: "";
+    background-color: #FF6B00;
+    height: 4px;
+    width: 100%;
+    left: 0;
+    bottom: -4px;
+    transition: all 0.2s ease-in-out;
+}
+
+.link-header.active::after {
+    transform: translateY(-4px);
+}
+
+.link-header:hover::after {
+    transform: translateY(-4px);
+
 }
 
 .post-new-play-link {
