@@ -2,26 +2,44 @@
 .page-fullStory {
     display: flex;
     flex-direction: column;
-    padding-left: 15%;
-    padding-right: 15%;
+    margin-left: auto;
+    margin-right: auto;
     padding-top: 2%;
+    width: 100%;
+    max-width: 700px;
+
 }
 
-.fullStory-headerline, .fullStory-line {
+.fullStory-headerline {
   display: flex;
-  flex-direction: row;
-  width: 100%;
+
 }
 
-.fullStory-headerblock{
-    border-style: solid;
+.fullStory-line {
+    display: flex;
+}
+
+.fullStory-headerline:not(:first-child) {
+    margin-top: 20px;
+}
+
+.fullStory-ddate{
     margin: 1px;
     width: 300px;
+
+}
+
+.fullStory-cellgame {
+    margin: 0 1px;
+    width: 300px;
+    background-color: #F5F5F5;
 }
 
 .fullStory-headerplayer{
 
     flex-grow: 1;
+    flex-basis: 0;
+    max-width: 100px;
     background-color: #FF6B00;
     border-radius: 4px 4px 0 0;
     margin: 0  1px;
@@ -29,22 +47,40 @@
     text-align: center;
 }
 
-.fullStory-headerplayer:last-child {
-    margin-right: 300px;
+.fullStory-cellscore {
+    position: relative;
+    flex-grow: 1;
+    flex-basis: 0;
+    max-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 1px;
+    background-color: #F5F5F5;
+}
+
+.fullStory-cellscore.winner::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 4px;
+    width: 10px;
+    height: 4px;
+    border-radius: 1px;
+    border-left: 4px solid #e145a3;
+    border-bottom: 4px solid #e145a3;
+    transform: rotate(-45deg);
+}
+
+.fullstory-span-counts {
+    color: red;
+    font-size: 10px;
+    margin-left: 4px;
+
 }
 
 
 
-.bl {
-    border: 1px dashed grey;
-    margin: 1px;
-}
 
 
-
-.rrr {
-    width: 100px;
-    border: 1px dashed grey;
-    margin: 1px;
-}
 

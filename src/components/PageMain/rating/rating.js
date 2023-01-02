@@ -27,6 +27,10 @@ class Rating extends React.Component {
     return(
 
     <div className="rating">
+        <div className="headrow">
+          <div className="gamename" />
+          {this.props.players.map((item) => <div className="playerheader">{item.name}</div>)}
+        </div>
         {this.props.rating.items.map((i) => (
           <div className="tabrow ">
             <div className="gamename">
