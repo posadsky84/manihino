@@ -67,8 +67,8 @@
     width: 10px;
     height: 4px;
     border-radius: 1px;
-    border-left: 4px solid #e145a3;
-    border-bottom: 4px solid #e145a3;
+    border-left: 3px solid #FF6B00;
+    border-bottom: 3px solid #FF6B00;
     transform: rotate(-45deg);
 }
 

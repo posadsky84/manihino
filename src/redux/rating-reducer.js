@@ -13,8 +13,21 @@ export const setRatingThunk = () => {
   return async dispatch => {
 
       const response = await API.getRating();
-      dispatch(setRating(response.data));
+      const result = response.data.map((item) => {
+        const champIndex = item.results.reduce((res, i) => {
+          if (i.wins > res.maxWins) {
+            res.maxWins = i.wins;
+            res.playerId = i.player_id;
+          } else if (i.wins === res.maxWins) {
+            res.playerId = 0;
+          }
+          return res;
+        }, {playerId: 0, maxWins: 0});
 
+      return {...item, results: item.results.map(i => i.player_id === champIndex.playerId ? {...i, champion: true} : i)};
+
+      });
+      dispatch(setRating(result));
   }
 }
 

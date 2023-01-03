@@ -6,7 +6,7 @@ import ru from 'date-fns/locale/ru';
 import { Formik, Form, Field, ErrorMessage, FieldArray, useFormikContext } from "formik";
 import { useCallback, useRef, useEffect, useState } from "react";
 import React from "react";
-import WinnerIcon from "./winnerIcon";
+import WinnerIcon from "../../../winnerIcon";
 
 registerLocale('ru', ru);
 
@@ -75,7 +75,7 @@ const PlayersArea = ({ players }) => {
         <div className="player-label">{item.name}</div>
         <Field className="player-score" name={`scores[${item.id - 1}]`} type="number"/>
         <label className={`radio-label ${+formikProps.values.winner === +item.id ? "selected" : ""}`} htmlFor={item.id} onClick={(e) => uncheckOnClick(e, item.id)}>
-          <WinnerIcon isSelected={+formikProps.values.winner === +item.id}/>
+          <WinnerIcon className={`winner-icon ${+formikProps.values.winner === +item.id ? "selected" : ""}`} />
         </label>
         <Field type="radio" name={`winner`} id={item.id} value={`${item.id}`}/>
       </div>

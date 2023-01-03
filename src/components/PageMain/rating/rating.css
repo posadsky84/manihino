@@ -29,6 +29,13 @@
     margin-top: 2px;
 }
 
+.champion-medal {
+    position: absolute;
+    left: 85px;
+    width: 20px;
+    height: 20px;
+    fill: #FF6B00;
+}
 
 .gamename {
     padding-left: 24px;
@@ -64,6 +71,7 @@
 }
 
 .score {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,3 +81,6 @@
     flex-basis: 0;
 }
 
+.score.winner {
+    font-weight: bold;
+}
