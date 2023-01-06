@@ -1,17 +1,15 @@
-import { API } from "../api";
+import { API } from '../api';
 
 const SET_FULLSTORY = `SET_FULLSTORY`;
 
-const setFullStory = (list) => ({type: SET_FULLSTORY, list});
-export const getFullStoryThunk = season => {
-  return async dispatch => {
-    const response = await API.getPlaysDetailed(season);
-    dispatch(setFullStory(response.data));
-  }
-}
+const setFullStory = list => ({ type: SET_FULLSTORY, list });
+export const getFullStoryThunk = season => async dispatch => {
+  const response = await API.getPlaysDetailed(season);
+  dispatch(setFullStory(response.data));
+};
 
 const initState = {
-  list: []
+  list: [],
 };
 
 const fullStoryReducer = (state = initState, action) => {
@@ -20,15 +18,11 @@ const fullStoryReducer = (state = initState, action) => {
       return {
         ...state,
         list: action.list,
-      }
+      };
     }
     default:
       return state;
-
   }
-
-
-
-}
+};
 
 export default fullStoryReducer;

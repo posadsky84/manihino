@@ -9,23 +9,25 @@ const initState = {
   dayHistory: [],
 };
 
-const selectDay = (selectedDay, dayHistory) => ({type: SELECT_DAY, selectedDay, dayHistory});
-const setCalendar = calendar => ({type: SET_CALENDAR, calendar});
+const selectDay = (selectedDay, dayHistory) => ({ type: SELECT_DAY, selectedDay, dayHistory });
+const setCalendar = calendar => ({ type: SET_CALENDAR, calendar });
 
 export const selectDayThunk = selectedDay => async dispatch => {
-  let response = await API.getPlaysDetailed(null, null,
-    `'${selectedDay.getFullYear()}-${selectedDay.getMonth()}-${selectedDay.getDate()}'`);
+  const response = await API.getPlaysDetailed(
+    null,
+    null,
+    `'${selectedDay.getFullYear()}-${selectedDay.getMonth()}-${selectedDay.getDate()}'`,
+  );
   if (response.status === 200) {
     return dispatch(selectDay(selectedDay, response.data[0]?.plays || []));
   }
 };
 
 export const getCalendarThunk = season => async dispatch => {
-  let response = await API.getCalendar(season);
+  const response = await API.getCalendar(season);
   if (response.status === 200) {
     return dispatch(setCalendar(response.data));
   }
-
 };
 
 const calendarReducer = (state = initState, action) => {
@@ -41,13 +43,11 @@ const calendarReducer = (state = initState, action) => {
       return {
         ...state,
         data: action.calendar,
-      }
+      };
     }
     default:
       return state;
   }
-
-}
-
+};
 
 export default calendarReducer;

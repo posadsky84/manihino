@@ -1,43 +1,44 @@
+import React, { useRef, useEffect } from 'react';
 import './postNewPlay.css';
-import { connect } from "react-redux";
-import DatePicker, { registerLocale } from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import { connect } from 'react-redux';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import ru from 'date-fns/locale/ru';
-import { Formik, Form, Field, ErrorMessage, FieldArray, useFormikContext } from "formik";
-import { useCallback, useRef, useEffect, useState } from "react";
-import React from "react";
-import WinnerIcon from "../../../winnerIcon";
+import {
+  Formik,
+  Form,
+  Field,
+  ErrorMessage,
+  useFormikContext,
+} from 'formik';
+import WinnerIcon from '../../../winnerIcon';
 
-registerLocale('ru', ru);
+registerLocale(`ru`, ru);
 
-const mapStateToProps = state => {
-  return {
-    players: state.players.items
-  }
-}
+const mapStateToProps = state => ({
+  players: state.players.items,
+});
 
 const initialValues = {
-  gameId: "",
+  gameId: ``,
   ddate: null,
   counts: false,
-  comment: "",
+  comment: ``,
   played: [true, true, false, true],
   scores: [10, 12, 14, 16],
   winner: 2,
 };
 const onSubmit = values => {
-
-
   const data = {
     gameId: values.gameId,
     ddate: values.ddate,
     counts: values.counts,
     comment: values.comment,
 
-  }
+  };
 
+  console.log(data);
 };
-
 
 const validate = values => {
   const errors = {};
@@ -51,41 +52,68 @@ const validate = values => {
 };
 
 const PlayersArea = ({ players }) => {
-
   const formikProps = useFormikContext();
 
   useEffect(() => {
     const curWinner = formikProps.values.scores.indexOf(Math.max(...formikProps.values.scores)) + 1;
-    formikProps.setFieldValue("winner", `${curWinner}`);
+    formikProps.setFieldValue(`winner`, `${curWinner}`);
   }, [formikProps.values.scores]);
 
-  //TODO Нужно завернуть в useCallback
+  // TODO Нужно завернуть в useCallback
   const uncheckOnClick = (e, itemId) => {
     if (+formikProps.values.winner === +itemId) {
       e.preventDefault();
-      formikProps.setFieldValue("winner", "0");
+      formikProps.setFieldValue(`winner`, `0`);
     }
-  }
+  };
 
+  return (
+    <>
+      {players.map(item => (
+        <div className="player-raw" key={`raw${item.id}`}>
+          <input checked type="checkbox" />
+          <div className="player-label">{item.name}</div>
+          <Field className="player-score" name={`scores[${item.id - 1}]`} type="number" />
+          <label
+            className={`radio-label ${+formikProps.values.winner === +item.id ? `selected` : ``}`}
+            htmlFor={item.id}
+            onClick={e => uncheckOnClick(e, item.id)}
+          >
+            <WinnerIcon className={`winner-icon ${+formikProps.values.winner === +item.id ? `selected` : ``}`} />
+          </label>
+          <Field
+            id={item.id}
+            name="winner"
+            type="radio"
+            value={`${item.id}`}
+          />
+        </div>
+      ))}
+    </>
+  );
+};
 
-  return <>
-    {players.map((item) =>
-      <div key={`raw${item.id}`} className="player-raw">
-        <input type="checkbox" checked={true}/>
-        <div className="player-label">{item.name}</div>
-        <Field className="player-score" name={`scores[${item.id - 1}]`} type="number"/>
-        <label className={`radio-label ${+formikProps.values.winner === +item.id ? "selected" : ""}`} htmlFor={item.id} onClick={(e) => uncheckOnClick(e, item.id)}>
-          <WinnerIcon className={`winner-icon ${+formikProps.values.winner === +item.id ? "selected" : ""}`} />
-        </label>
-        <Field type="radio" name={`winner`} id={item.id} value={`${item.id}`}/>
-      </div>
-    )
-    }</>;
+function useOnClickOutside(ref, handler) {
+  useEffect(
+    () => {
+      const listener = event => {
+        if (!ref.current || ref.current.contains(event.target)) {
+          return;
+        }
+        handler(event);
+      };
+      document.addEventListener(`mousedown`, listener);
+      document.addEventListener(`touchstart`, listener);
+      return () => {
+        document.removeEventListener(`mousedown`, listener);
+        document.removeEventListener(`touchstart`, listener);
+      };
+    },
+    [ref, handler],
+  );
 }
 
-
 const PostNewPlay = ({ players, setShowModal }) => {
-
   const ref = useRef();
   useOnClickOutside(ref, () => setShowModal(false));
 
@@ -93,7 +121,7 @@ const PostNewPlay = ({ players, setShowModal }) => {
     <div className="modal-back">
       <div className="post-new-play-modal" ref={ref}>
         <div className="post-new-play-caption">Добавить партию</div>
-        <Formik initialValues={initialValues} validate={validate} onSubmit={onSubmit}>
+        <Formik initialValues={initialValues} onSubmit={onSubmit} validate={validate}>
           <Form>
             <div className="post-new-play-input-block">
               <label className="post-new-play-label" htmlFor="ddate">Дата</label>
@@ -101,12 +129,20 @@ const PostNewPlay = ({ players, setShowModal }) => {
                 {({ form, field }) => {
                   const { setFieldValue } = form;
                   const { value } = field;
-                  return <DatePicker className="post-new-play-field" id="ddate" locale="ru" {...field} selected={value}
-                                     onChange={val => setFieldValue("ddate", val)}/>
+                  return (
+                    <DatePicker
+                      className="post-new-play-field"
+                      id="ddate"
+                      locale="ru"
+                      {...field}
+                      onChange={val => setFieldValue(`ddate`, val)}
+                      selected={value}
+                    />
+                  );
                 }}
               </Field>
               <div className="post-new-play-error">
-                <ErrorMessage name="ddate"/>
+                <ErrorMessage name="ddate" />
               </div>
             </div>
             <div className="post-new-play-input-block">
@@ -118,48 +154,26 @@ const PostNewPlay = ({ players, setShowModal }) => {
                 type="text"
               />
               <div className="post-new-play-error">
-                <ErrorMessage name="gameId"/>
+                <ErrorMessage name="gameId" />
               </div>
             </div>
-            <PlayersArea players={players}/>
+            <PlayersArea players={players} />
             <div className="post-new-play-input-block">
               <label className="post-new-play-label" htmlFor="comment">Комментарий</label>
               <Field
+                as="textarea"
                 className="post-new-play-field-comment"
                 id="comment"
                 name="comment"
-                as="textarea"
               />
             </div>
 
-            <button type="submit" className="post-new-play-button">Добавить</button>
+            <button className="post-new-play-button" type="submit">Добавить</button>
           </Form>
         </Formik>
       </div>
     </div>
   );
-
-}
-
-
-function useOnClickOutside(ref, handler) {
-  useEffect(
-    () => {
-      const listener = (event) => {
-        if (!ref.current || ref.current.contains(event.target)) {
-          return;
-        }
-        handler(event);
-      };
-      document.addEventListener("mousedown", listener);
-      document.addEventListener("touchstart", listener);
-      return () => {
-        document.removeEventListener("mousedown", listener);
-        document.removeEventListener("touchstart", listener);
-      };
-    },
-    [ref, handler]
-  );
-}
+};
 
 export default connect(mapStateToProps)(PostNewPlay);

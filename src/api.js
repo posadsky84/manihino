@@ -1,7 +1,5 @@
-import axios from "axios";
-import { backURL } from "./misc";
-
-
+import axios from 'axios';
+import { backURL } from './misc';
 
 const instance = axios.create({
   baseURL: backURL,
@@ -13,7 +11,7 @@ export const API = {
     return instance.get(`/rating`);
   },
   getPlaysDetailed(season, gameId, ddate) {
-    return instance.get(`/playsDetailed`, {params: {season, gameId, ddate}});
+    return instance.get(`/playsDetailed`, { params: { season, gameId, ddate } });
   },
   getCalendar(season) {
     return instance.get(`/calendar?season=${season}`);

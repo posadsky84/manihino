@@ -1,11 +1,10 @@
-import { applyMiddleware, combineReducers, legacy_createStore } from "redux";
-import RatingReducer from "./rating-reducer";
+import { applyMiddleware, combineReducers, legacy_createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import fullStoryReducer from "./fullStory-reducer";
-import calendarReducer from "./calendar-reducer";
-import uiReducer from "./ui-reducer";
-import PlayersReducer from "./players-reducer";
-
+import RatingReducer from './rating-reducer';
+import fullStoryReducer from './fullStory-reducer';
+import calendarReducer from './calendar-reducer';
+import uiReducer from './ui-reducer';
+import PlayersReducer from './players-reducer';
 
 const reducers = combineReducers({
   rating: RatingReducer,

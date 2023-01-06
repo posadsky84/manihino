@@ -1,20 +1,14 @@
-import "./playerslist.css";
-import {connect} from "react-redux";
+import './playerslist.css';
+import { connect } from 'react-redux';
 
+const mapStateToProps = state => ({
+  players: state.players.items,
+});
 
-const mapStateToProps = (state) => {
-  return {
-    players: state.players.items
-  }
-};
-
-const PlayersList = ({players}) => {
-  return (
-    <div className="playerslist">
-      {players.map(({name}) => <div>{name}</div>)}
-    </div>
-  );
-
-}
+const PlayersList = ({ players }) => (
+  <div className="playerslist">
+    {players.map(({ name }) => <div>{name}</div>)}
+  </div>
+);
 
 export default connect(mapStateToProps)(PlayersList);

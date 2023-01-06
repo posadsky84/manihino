@@ -1,14 +1,10 @@
-import "./pagemain.css";
-import Rating from "./rating/rating";
+import './pagemain.css';
+import Rating from './rating/rating';
 
-const PageMain = () => {
-
-  return (
-    <div className="pagemain">
-      <Rating />
-    </div>
-  );
-
-}
+const PageMain = () => (
+  <div className="pagemain">
+    <Rating />
+  </div>
+);
 
 export default PageMain;

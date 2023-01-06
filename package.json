@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
+    "date-fns": "^2.29.3",
     "formik": "^2.2.9",
     "react": "^18.2.0",
     "react-datepicker": "^4.8.0",
@@ -18,6 +19,11 @@
     "redux-thunk": "^2.4.2",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-import-quotes": "0.0.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -27,8 +33,72 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "airbnb"
+    ],
+    "plugins": [
+      "import",
+      "import-quotes"
+    ],
+    "rules": {
+      "default-param-last": "off",
+      "arrow-parens": [
+        "error",
+        "as-needed"
+      ],
+      "max-len": [
+        "error",
+        120,
+        2,
+        {
+          "ignoreComments": true
+        }
+      ],
+      "quotes": [
+        "error",
+        "backtick"
+      ],
+      "react/jsx-sort-props": [
+        "warn",
+        {
+          "callbacksLast": false,
+          "shorthandFirst": false,
+          "shorthandLast": false,
+          "ignoreCase": true,
+          "noSortAlphabetically": false,
+          "reservedFirst": false
+        }
+      ],
+      "no-nested-ternary": "off",
+      "react/prop-types": "off",
+      "react/react-in-jsx-scope": "off",
+      "react/destructuring-assignment": "off",
+      "react/jsx-filename-extension": "off",
+      "no-irregular-whitespace": "off",
+      "jsx-a11y/label-has-associated-control": "off",
+      "jsx-a11y/no-static-element-interactions": "off",
+      "jsx-a11y/click-events-have-key-events": "off",
+      "jsx-a11y/no-noninteractive-element-interactions": "off",
+      "import/prefer-default-export": "off",
+      "jsx-a11y/no-autofocus": "off",
+      "no-debugger": "off",
+      "react/function-component-definition": "off",
+      "react/jsx-props-no-spreading": "off",
+      "consistent-return": "off",
+      "react/jsx-max-props-per-line": [
+        "warn",
+        {
+          "maximum": {
+            "single": 3,
+            "multi": 1
+          }
+        }
+      ],
+      "import-quotes/import-quotes": [
+        1,
+        "single"
+      ]
+    }
   },
   "browserslist": {
     "production": [
