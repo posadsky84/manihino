@@ -29,7 +29,7 @@ const PageFullStory = ({ fullStory, players }) => (
                     </div>
                   );
                 })}
-                { /* <div className="bl fullStory-cellcomment">{item.comment}</div> */ }
+                <div className="fullstory-cellcomment">{playItem.comment}</div>
               </div>
             ))}
           </>

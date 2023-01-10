@@ -1,0 +1,31 @@
+.games-drop-down {
+    display: flex;
+    flex-direction: column;
+    border: solid black;
+    position: absolute;
+    z-index: 3;
+    background-color: white;
+
+}
+
+.games-item {
+    cursor: pointer;
+
+
+}
+
+.games-input {
+    position: relative;
+    background-color: #F6F7F8;
+    border: 1px solid #EEF0F1;
+    border-radius: 4px;
+    height: 36px;
+    width: 100%;
+
+
+}
+
+.games-item:hover {
+    background-color: grey;
+
+}

@@ -7,12 +7,13 @@ import WinnerIcon from '../../../winnerIcon';
 const mapStateToProps = state => ({
   players: state.players.items,
   rating: state.rating,
+  ui: state.ui,
 });
 
 class Rating extends React.Component {
   componentDidMount() {
     if (this.props.rating.items.length === 0) {
-      this.props.setRatingThunk();
+      this.props.setRatingThunk(this.props.ui.season);
     }
   }
 

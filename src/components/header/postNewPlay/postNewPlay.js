@@ -12,6 +12,8 @@ import {
   useFormikContext,
 } from 'formik';
 import WinnerIcon from '../../../winnerIcon';
+import GamesDropDown from './gamesDropDown/gamesDropDown';
+import { addPlayThunk } from '../../../redux/ui-reducer';
 
 registerLocale(`ru`, ru);
 
@@ -20,24 +22,40 @@ const mapStateToProps = state => ({
 });
 
 const initialValues = {
-  gameId: ``,
+  gameId: null,
   ddate: null,
   counts: false,
   comment: ``,
-  played: [true, true, false, true],
-  scores: [10, 12, 14, 16],
-  winner: 2,
+  played: [true, true, true, true],
+  scores: [null, null, null, null],
+  winner: null,
 };
-const onSubmit = values => {
+
+const onSubmit = (
+  values,
+  reloadFunc,
+  setShowModal,
+  addPlayThunk) => {
   const data = {
     gameId: values.gameId,
-    ddate: values.ddate,
+    ddate: `${values.ddate.getFullYear()}-${(`0${values.ddate.getMonth() + 1}`)
+      .slice(-2)}-${(`0${values.ddate.getDate() + 1}`)
+      .slice(-2)}`,
     counts: values.counts,
     comment: values.comment,
-
+    players: values.played.map((item, index) => item
+      ? {
+        playerId: index + 1,
+        score: values.scores[index],
+        winner: (+values.winner === index + 1),
+      }
+      : null).filter(Boolean),
   };
 
-  console.log(data);
+  addPlayThunk(data, () => {
+    reloadFunc();
+    setShowModal();
+  });
 };
 
 const validate = values => {
@@ -71,7 +89,7 @@ const PlayersArea = ({ players }) => {
     <>
       {players.map(item => (
         <div className="player-raw" key={`raw${item.id}`}>
-          <input checked type="checkbox" />
+          <input className="player-input" checked type="checkbox" />
           <div className="player-label">{item.name}</div>
           <Field className="player-score" name={`scores[${item.id - 1}]`} type="number" />
           <label
@@ -113,7 +131,7 @@ function useOnClickOutside(ref, handler) {
   );
 }
 
-const PostNewPlay = ({ players, setShowModal }) => {
+const PostNewPlay = ({ players, setShowModal, reloadFunc, addPlayThunk }) => {
   const ref = useRef();
   useOnClickOutside(ref, () => setShowModal(false));
 
@@ -121,8 +139,8 @@ const PostNewPlay = ({ players, setShowModal }) => {
     <div className="modal-back">
       <div className="post-new-play-modal" ref={ref}>
         <div className="post-new-play-caption">Добавить партию</div>
-        <Formik initialValues={initialValues} onSubmit={onSubmit} validate={validate}>
-          <Form>
+        <Formik initialValues={initialValues} onSubmit={values => onSubmit(values, reloadFunc, setShowModal, addPlayThunk)} validate={validate}>
+          <Form autoComplete="off">
             <div className="post-new-play-input-block">
               <label className="post-new-play-label" htmlFor="ddate">Дата</label>
               <Field name="ddate">
@@ -145,18 +163,17 @@ const PostNewPlay = ({ players, setShowModal }) => {
                 <ErrorMessage name="ddate" />
               </div>
             </div>
-            <div className="post-new-play-input-block">
-              <label className="post-new-play-label" htmlFor="gameId">Игра</label>
-              <Field
-                className="post-new-play-field"
-                id="gameId"
-                name="gameId"
-                type="text"
-              />
-              <div className="post-new-play-error">
-                <ErrorMessage name="gameId" />
-              </div>
-            </div>
+            <label className="post-new-play-label" htmlFor="gameId">Игра</label>
+            <Field name="gameId">
+              {({ form, field }) => {
+                const { setFieldValue } = form;
+                const { value } = field;
+                return (
+                  <GamesDropDown gameId={value} setFieldValue={setFieldValue} />
+                );
+              }}
+            </Field>
+
             <PlayersArea players={players} />
             <div className="post-new-play-input-block">
               <label className="post-new-play-label" htmlFor="comment">Комментарий</label>
@@ -167,7 +184,12 @@ const PostNewPlay = ({ players, setShowModal }) => {
                 name="comment"
               />
             </div>
-
+            <label className="player-label" htmlFor="counts">Идет в зачет</label>
+            <Field
+              id="counts"
+              name="counts"
+              type="checkbox"
+            />
             <button className="post-new-play-button" type="submit">Добавить</button>
           </Form>
         </Formik>
@@ -176,4 +198,4 @@ const PostNewPlay = ({ players, setShowModal }) => {
   );
 };
 
-export default connect(mapStateToProps)(PostNewPlay);
+export default connect(mapStateToProps, { addPlayThunk })(PostNewPlay);

@@ -2,12 +2,12 @@ import './header.css';
 import OtherHeader from './otherheader/otherheader';
 import LogoImage from './logoImage';
 
-const Header = () => (
+const Header = ({ reloadFunc }) => (
   <div className="header">
     <div className="site-logo">
       <LogoImage />
     </div>
-    <OtherHeader />
+    <OtherHeader reloadFunc={reloadFunc} />
   </div>
 );
 

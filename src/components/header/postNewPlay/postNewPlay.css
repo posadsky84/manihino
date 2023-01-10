@@ -83,8 +83,8 @@
 }
 
 .winner-icon {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
 }
 
 .winner-icon.selected path{
@@ -157,12 +157,12 @@
     margin-top: 24px;
 }
 
-input[type="checkbox"] {
+.player-input {
     position: absolute;
     left: -9999px;
 }
 
-input[type="checkbox"] + div {
+.player-input + div {
     display: inline-block;
     position: relative;
     padding-left: 28px;
@@ -174,7 +174,7 @@ input[type="checkbox"] + div {
     max-width: 500px;
 }
 
-input[type="checkbox"] + div:before {
+.player-input + div:before {
     content: "";
     position: absolute;
     left: 0px;
@@ -185,12 +185,12 @@ input[type="checkbox"] + div:before {
     background-color: #ffffff;
 }
 
-input[type="checkbox"] + div:before {
+.player-input + div:before {
     border-radius: 2px;
 }
 
 
-input[type="checkbox"] + div:after {
+.player-input + div:after {
     content: "";
     position: absolute;
     -webkit-transition: all 0.0s ease;
@@ -199,7 +199,7 @@ input[type="checkbox"] + div:after {
     transition: all 0.0s ease;
 }
 
-input[type="checkbox"] + div:after {
+.player-input + div:after {
     left: 3px;
     top: 4px;
     width: 10px;
@@ -215,11 +215,11 @@ input[type="checkbox"] + div:after {
 }
 
 
-input[type="checkbox"]:not(:checked) + div:after {
+.player-input:not(:checked) + div:after {
     opacity: 0;
 }
 
-input[type="checkbox"]:checked + div:after {
+.player-input:checked + div:after {
     opacity: 1;
 }
 

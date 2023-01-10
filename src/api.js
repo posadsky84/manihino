@@ -7,8 +7,8 @@ const instance = axios.create({
 });
 
 export const API = {
-  getRating() {
-    return instance.get(`/rating`);
+  getRating(season) {
+    return instance.get(`/rating?season=${season}`);
   },
   getPlaysDetailed(season, gameId, ddate) {
     return instance.get(`/playsDetailed`, { params: { season, gameId, ddate } });
@@ -19,7 +19,13 @@ export const API = {
   getPlayers() {
     return instance.get(`/players`);
   },
+  getGames() {
+    return instance.get(`/games`);
+  },
   addPlay(data) {
     return instance.post(`/addPlay`, data);
+  },
+  getAllSeasons() {
+    return instance.get(`/allSeasons`);
   },
 };

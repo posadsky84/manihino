@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import PostNewPlay from '../postNewPlay/postNewPlay';
 
-const OtherHeader = () => {
+const OtherHeader = ({ reloadFunc }) => {
   const [showModal, setShowModal] = useState(false);
   return (
     <nav className="other-header">
@@ -24,7 +24,7 @@ const OtherHeader = () => {
       </NavLink>
       <div className="post-new-play-link link-header" onClick={() => setShowModal(true)}>
         Добавить игру
-        {showModal && <PostNewPlay setShowModal={setShowModal} />}
+        {showModal && <PostNewPlay reloadFunc={reloadFunc} setShowModal={setShowModal} />}
       </div>
     </nav>
   );

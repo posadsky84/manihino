@@ -17,6 +17,7 @@
 
 .fullStory-line {
     display: flex;
+    position: relative;
 }
 
 .fullStory-headerline:not(:first-child) {
@@ -79,7 +80,12 @@
 
 }
 
-
+.fullstory-cellcomment {
+    position: absolute;
+    left: calc(100% + 10px);
+    font-size: 12px;
+    width: 100%;
+}
 
 
 

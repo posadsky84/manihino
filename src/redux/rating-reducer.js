@@ -7,8 +7,8 @@ const initState = {
   items: [],
 };
 
-export const setRatingThunk = () => async dispatch => {
-  const response = await API.getRating();
+export const setRatingThunk = season => async dispatch => {
+  const response = await API.getRating(season);
   const result = response.data.map(item => {
     const champIndex = item.results.reduce((res, i) => {
       if (i.wins > res.maxWins) {
