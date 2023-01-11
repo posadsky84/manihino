@@ -17,6 +17,12 @@ class Rating extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (+prevProps.ui.season !== +this.props.ui.season) {
+      this.props.setRatingThunk(this.props.ui.season);
+    }
+  }
+
   render() {
     return (
 

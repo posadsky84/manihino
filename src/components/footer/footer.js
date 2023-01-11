@@ -5,7 +5,7 @@ const Footer = () => (
     <div>(с) 2022 Пет-проект Посадского А.И.  </div>
     <a
       className="git-link"
-      href="https://github.com/posadsky/keklog"
+      href="https://github.com/posadsky84/manihino"
       rel="noreferrer"
       target="_blank"
     >

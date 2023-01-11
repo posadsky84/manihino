@@ -14,6 +14,12 @@ class PageFullStoryAPI extends React.Component {
     this.props.getFullStoryThunk(this.props.ui.season);
   }
 
+  componentDidUpdate(prevProps) {
+    if (+prevProps.ui.season !== +this.props.ui.season) {
+      this.props.getFullStoryThunk(this.props.ui.season);
+    }
+  }
+
   render() {
     return (
       <PageFullStory fullStory={this.props.fullStory} players={this.props.players} />

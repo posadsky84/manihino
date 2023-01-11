@@ -1,0 +1,30 @@
+.season-picker {
+    position: relative;
+    margin-right: 60px;
+    cursor: pointer;
+    font-size: 16px;
+
+
+}
+
+.season-picker-list {
+    position: absolute;
+    border: 1px solid #EEF0F1;
+    box-shadow: 0 2px 7px rgba(34, 35, 37, 0.21);
+    border-radius: 4px;
+    top: 20px;
+
+
+}
+
+.season-picker-item {
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px 13px;
+    background-color: #FFFFFF;
+
+}
+
+.season-picker-item:hover {
+    background-color: #F6F7F8;
+}

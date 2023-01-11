@@ -131,7 +131,9 @@ function useOnClickOutside(ref, handler) {
   );
 }
 
-const PostNewPlay = ({ players, setShowModal, reloadFunc, addPlayThunk }) => {
+// TODO Неправильная дата улетает из picker
+
+const PostNewPlay = ({ players, setShowModal, reloadFunc, addPlay }) => {
   const ref = useRef();
   useOnClickOutside(ref, () => setShowModal(false));
 
@@ -139,7 +141,7 @@ const PostNewPlay = ({ players, setShowModal, reloadFunc, addPlayThunk }) => {
     <div className="modal-back">
       <div className="post-new-play-modal" ref={ref}>
         <div className="post-new-play-caption">Добавить партию</div>
-        <Formik initialValues={initialValues} onSubmit={values => onSubmit(values, reloadFunc, setShowModal, addPlayThunk)} validate={validate}>
+        <Formik initialValues={initialValues} onSubmit={values => onSubmit(values, reloadFunc, setShowModal, addPlay)} validate={validate}>
           <Form autoComplete="off">
             <div className="post-new-play-input-block">
               <label className="post-new-play-label" htmlFor="ddate">Дата</label>
@@ -198,4 +200,4 @@ const PostNewPlay = ({ players, setShowModal, reloadFunc, addPlayThunk }) => {
   );
 };
 
-export default connect(mapStateToProps, { addPlayThunk })(PostNewPlay);
+export default connect(mapStateToProps, { addPlay: addPlayThunk })(PostNewPlay);

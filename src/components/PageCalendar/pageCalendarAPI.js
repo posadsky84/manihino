@@ -16,6 +16,12 @@ class pageCalendarAPI extends React.Component {
     this.getCalendar();
   }
 
+  componentDidUpdate(prevProps) {
+    if (+prevProps.ui.season !== +this.props.ui.season) {
+      this.getCalendar();
+    }
+  }
+
   getCalendar = async () => {
     this.props.getCalendarThunk(this.props.ui.season);
   };
