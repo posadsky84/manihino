@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './postNewPlay.css';
 import { connect } from 'react-redux';
 import DatePicker, { registerLocale } from 'react-datepicker';
@@ -14,6 +14,7 @@ import {
 import WinnerIcon from '../../../winnerIcon';
 import GamesDropDown from './gamesDropDown/gamesDropDown';
 import { addPlayThunk } from '../../../redux/ui-reducer';
+import WrapperClickOutside from '../../../helpers/wrapperClickOutside';
 
 registerLocale(`ru`, ru);
 
@@ -35,7 +36,8 @@ const onSubmit = (
   values,
   reloadFunc,
   setShowModal,
-  addPlayThunk) => {
+  addPlayThunk,
+) => {
   const data = {
     gameId: values.gameId,
     ddate: `${values.ddate.getFullYear()}-${(`0${values.ddate.getMonth() + 1}`)
@@ -43,13 +45,13 @@ const onSubmit = (
       .slice(-2)}`,
     counts: values.counts,
     comment: values.comment,
-    players: values.played.map((item, index) => item
+    players: values.played.map((item, index) => (item
       ? {
         playerId: index + 1,
         score: values.scores[index],
         winner: (+values.winner === index + 1),
       }
-      : null).filter(Boolean),
+      : null)).filter(Boolean),
   };
 
   addPlayThunk(data, () => {
@@ -89,7 +91,7 @@ const PlayersArea = ({ players }) => {
     <>
       {players.map(item => (
         <div className="player-raw" key={`raw${item.id}`}>
-          <input className="player-input" checked type="checkbox" />
+          <input checked className="player-input" type="checkbox" />
           <div className="player-label">{item.name}</div>
           <Field className="player-score" name={`scores[${item.id - 1}]`} type="number" />
           <label
@@ -111,37 +113,23 @@ const PlayersArea = ({ players }) => {
   );
 };
 
-function useOnClickOutside(ref, handler) {
-  useEffect(
-    () => {
-      const listener = event => {
-        if (!ref.current || ref.current.contains(event.target)) {
-          return;
-        }
-        handler(event);
-      };
-      document.addEventListener(`mousedown`, listener);
-      document.addEventListener(`touchstart`, listener);
-      return () => {
-        document.removeEventListener(`mousedown`, listener);
-        document.removeEventListener(`touchstart`, listener);
-      };
-    },
-    [ref, handler],
-  );
-}
-
 // TODO Неправильная дата улетает из picker
 
-const PostNewPlay = ({ players, setShowModal, reloadFunc, addPlay }) => {
-  const ref = useRef();
-  useOnClickOutside(ref, () => setShowModal(false));
-
-  return (
-    <div className="modal-back">
-      <div className="post-new-play-modal" ref={ref}>
+const PostNewPlay = ({
+  players,
+  setShowModal,
+  reloadFunc,
+  addPlay,
+}) => (
+  <div className="modal-back">
+    <WrapperClickOutside closeCallback={() => setShowModal(false)}>
+      <div className="post-new-play-modal">
         <div className="post-new-play-caption">Добавить партию</div>
-        <Formik initialValues={initialValues} onSubmit={values => onSubmit(values, reloadFunc, setShowModal, addPlay)} validate={validate}>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={values => onSubmit(values, reloadFunc, setShowModal, addPlay)}
+          validate={validate}
+        >
           <Form autoComplete="off">
             <div className="post-new-play-input-block">
               <label className="post-new-play-label" htmlFor="ddate">Дата</label>
@@ -186,7 +174,7 @@ const PostNewPlay = ({ players, setShowModal, reloadFunc, addPlay }) => {
                 name="comment"
               />
             </div>
-            <label className="player-label" htmlFor="counts">Идет в зачет</label>
+            <label className="player-label" htmlFor="counts">Идет в зачёт</label>
             <Field
               id="counts"
               name="counts"
@@ -196,8 +184,8 @@ const PostNewPlay = ({ players, setShowModal, reloadFunc, addPlay }) => {
           </Form>
         </Formik>
       </div>
-    </div>
-  );
-};
+    </WrapperClickOutside>
+  </div>
+);
 
 export default connect(mapStateToProps, { addPlay: addPlayThunk })(PostNewPlay);
