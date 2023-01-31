@@ -4,6 +4,7 @@ import { useState } from 'react';
 import PostNewPlay from './postNewPlay/postNewPlay';
 import SeasonPicker from './seasonPicker/seasonPicker';
 import LogoImage from './logoImage';
+import NewPlayIcon from './newPlayIcon';
 
 const Header = ({ reloadFunc }) => {
   const [showModal, setShowModal] = useState(false);
@@ -28,12 +29,16 @@ const Header = ({ reloadFunc }) => {
         >
           Календарь
         </NavLink>
-        <div className="post-new-play-link link-header" onClick={() => setShowModal(true)}>
-          Добавить игру
-          {showModal && <PostNewPlay reloadFunc={reloadFunc} setShowModal={setShowModal} />}
-        </div>
       </nav>
-      <SeasonPicker />
+      <div className="header-bar">
+        <SeasonPicker />
+      <div className="post-new-play-btn" onClick={() => setShowModal(true)}>
+        <NewPlayIcon />
+        <div className="post-new-play-lbl">{`Добавить\nпартию`}</div>
+        {showModal && <PostNewPlay reloadFunc={reloadFunc} setShowModal={setShowModal} />}
+      </div>
+
+      </div>
     </div>
   );
 };

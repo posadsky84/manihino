@@ -34,7 +34,7 @@ const PageCalendar = ({
                   return (
                     <div
                       className={dayClass}
-                      onClick={() => selectDay(new Date(season, monthIndex + 1, item + 1))}
+                      onClick={() => selectDay(new Date(season, monthIndex, item + 1))}
                     />
                   );
                 })}

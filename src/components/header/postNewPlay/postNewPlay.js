@@ -41,7 +41,7 @@ const onSubmit = (
   const data = {
     gameId: values.gameId,
     ddate: `${values.ddate.getFullYear()}-${(`0${values.ddate.getMonth() + 1}`)
-      .slice(-2)}-${(`0${values.ddate.getDate() + 1}`)
+      .slice(-2)}-${(`0${values.ddate.getDate()}`)
       .slice(-2)}`,
     counts: values.counts,
     comment: values.comment,

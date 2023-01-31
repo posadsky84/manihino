@@ -16,7 +16,7 @@ export const selectDayThunk = selectedDay => async dispatch => {
   const response = await API.getPlaysDetailed(
     null,
     null,
-    `'${selectedDay.getFullYear()}-${selectedDay.getMonth()}-${selectedDay.getDate()}'`,
+    `'${selectedDay.getFullYear()}-${selectedDay.getMonth() + 1}-${selectedDay.getDate()}'`,
   );
   if (response.status === 200) {
     return dispatch(selectDay(selectedDay, response.data[0]?.plays || []));
@@ -43,6 +43,7 @@ const calendarReducer = (state = initState, action) => {
       return {
         ...state,
         data: action.calendar,
+        dayHistory: [],
       };
     }
     default:

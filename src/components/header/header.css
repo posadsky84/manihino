@@ -1,19 +1,19 @@
 .header {
     position: fixed;
     background-color: white;
-    display: flex;
+    display: grid;
+    grid-template-columns: 300px auto 300px;
     height: 80px;
     align-items: center;
-    justify-content: space-between;
     width: 100%;
     z-index: 1;
     min-width: 1100px;
+    padding-left: 48px;
+    box-sizing: border-box;
 }
 
 .site-logo {
-    margin-top: 26px;
-    margin-bottom: 26px;
-    margin-left: 48px;
+
 }
 
 .other-header {
@@ -62,8 +62,36 @@
 
 }
 
-.post-new-play-link {
-    margin-left: auto;
-
+.post-new-play-btn {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
+.post-new-play-lbl {
+    display: block;
+    white-space: pre;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+    margin-left: 8px;
+    margin-right: 24px;
+    color: #676D71;
+}
+
+.post-new-play-btn:hover .post-new-play-lbl{
+    color: #222425;
+}
+
+.post-new-play-btn:hover .new-play-icon {
+    fill: #222425;
+}
+
+.header-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+}
