@@ -1,6 +1,12 @@
 import { API } from '../api';
 
 const SET_RATING = `SET_RATING`;
+const SET_RATING_DETAILED = 'SET_RATING_DETAILED`'
+const COLLAPSE_RATING_DETAILED = 'COLLAPSE_RATING_DETAILED';
+export const GET_RATING_DETAILED = 'GET_RATING_DETAILED';
+export const getRatingDetailed = (season, gameId) => ({type: GET_RATING_DETAILED, season, gameId});
+export const setRatingDetailed = (gameId, data) => ({type: SET_RATING_DETAILED, gameId, data});
+export const collapseRatingDetailed = gameId => ({type: COLLAPSE_RATING_DETAILED, gameId});
 const setRating = rating => ({ type: SET_RATING, rating });
 
 const initState = {
@@ -35,6 +41,20 @@ const RatingReducer = (state = initState, action) => {
         ...state,
         items: action.rating,
       };
+    case SET_RATING_DETAILED:
+      return {
+        ...state,
+        items: state.items.map(item => (item.game_id === action.gameId)
+          ? {...item,
+             detailed: action.data,
+            }
+          : item),
+      };
+    case COLLAPSE_RATING_DETAILED:
+      return {
+        ...state,
+        items: state.items.map(item => (item.game_id === action.gameId) ? {...item, detailed: null} : item),
+      }
     default:
       return state;
   }
