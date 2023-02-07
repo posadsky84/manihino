@@ -25,8 +25,13 @@
     border-radius: 2px;
 }
 
+.tabrow:hover {
+    background-color: #F6F7F8;
+}
+
 .tabrow {
     margin-top: 2px;
+    cursor: pointer;
 }
 
 .champion-medal {
@@ -42,12 +47,17 @@
     padding-top: 6px;
     padding-bottom: 6px;
     width: 300px;
+    box-sizing: border-box;
 }
+
+
+/*.headrow .gamename {*/
+/*    cursor: initial;*/
+/*}*/
 
 
 .cnt-span {
     margin-left: 6px;
-
     color: #B4BCC0;
     font-style: italic;
 }
@@ -83,4 +93,78 @@
 
 .score.winner {
     font-weight: bold;
+}
+
+.rating-detail-row {
+    position: relative;
+    display: flex;
+}
+
+.rating-detail-ddate {
+    box-sizing: border-box;
+    width: 276px;
+    margin-left: 24px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background-color: #CDD3D7;
+    border-bottom: 1px solid rgba(180, 188, 192, 0.3);
+}
+
+.rating-detail-cell {
+    position: relative;
+    flex-basis: 0;
+    flex-grow: 1;
+    background-color: #CDD3D7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(180, 188, 192, 0.3);
+}
+
+.rating-detail-cell.winner {
+    font-weight: bold;
+}
+
+.rating-detail-cell.winner::before {
+    content: "";
+    position: absolute;
+    left: 30px;
+    top: 8px;
+    width: 10px;
+    height: 4px;
+    border-radius: 1px;
+    border-left: 3px solid #FF6B00;
+    border-bottom: 3px solid #FF6B00;
+    transform: rotate(-45deg);
+}
+
+.rating-detail-row::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    width: 8px;
+    height: 50%;
+    border-left: 1px solid #676D71;
+    border-bottom: 1px solid #676D71;
+}
+
+.rating-detail-row:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 10px;
+    height: 100%;
+    border-radius: 1px;
+    border-left: 1px solid #676D71;
+}
+
+.rating-detail-comm-span {
+    font-size: 12px;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.rating-detail-ddate-span {
+    font-size: 12px;
+    margin-left: 6px;
+    font-variant-numeric: tabular-nums;
 }
