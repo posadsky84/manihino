@@ -3,9 +3,33 @@
     margin-right: 60px;
     cursor: pointer;
     font-size: 16px;
+    color: #676D71;
 
 
 }
+
+.season-picker::before {
+    content: "";
+    position: absolute;
+    left: 50px;
+    width: 6px;
+    height: 6px;
+    border-left: 2px solid #676D71;
+    border-bottom: 2px solid #676D71;
+}
+
+.season-picker.closed::before {
+    transform: rotate(315deg);
+    transition: 200ms ease-in-out;
+    top: 4px;
+}
+
+.season-picker.open::before {
+    transform: rotate(135deg);
+    transition: 200ms ease-in-out;
+    top: 8px;
+}
+
 
 .season-picker-list {
     position: absolute;

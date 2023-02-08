@@ -26,9 +26,9 @@ class Rating extends React.Component {
 
   onGameClick = item => {
     if (!item.detailed) {
-      this.props.getRatingDetailed(this.props.ui.season, item.game_id);
+      this.props.getRatingDetailed(this.props.ui.season, item.gameId);
     } else {
-      this.props.collapseRatingDetailed(item.game_id);
+      this.props.collapseRatingDetailed(item.gameId);
     }
   };
 
@@ -42,13 +42,13 @@ class Rating extends React.Component {
         </div>
         {this.props.rating.items.map(i => (
           <div>
-            <div className="tabrow" onClick={() => this.onGameClick(i)} key={i.game_id}>
+            <div className="tabrow" onClick={() => this.onGameClick(i)} key={i.gameId}>
               <div className="gamename">
-                {i.game_name}
+                {i.gameName}
                 <span className="cnt-span">{i.cnt}</span>
               </div>
-              {i.results.map(({ wins, champion, player_id }) => (
-                <div className={`score ${champion ? `winner` : ``}`} key={player_id}>
+              {i.results.map(({ wins, champion, playerId }) => (
+                <div className={`score ${champion ? `winner` : ``}`} key={playerId}>
                   {+wins || ``}
                   {champion && <WinnerIcon className="champion-medal" />}
                 </div>

@@ -19,7 +19,7 @@ export const setRatingThunk = season => async dispatch => {
     const champIndex = item.results.reduce((res, i) => {
       if (i.wins > res.maxWins) {
         res.maxWins = i.wins;
-        res.playerId = i.player_id;
+        res.playerId = i.playerId;
       } else if (i.wins === res.maxWins) {
         res.playerId = 0;
       }
@@ -28,7 +28,7 @@ export const setRatingThunk = season => async dispatch => {
 
     return {
       ...item,
-      results: item.results.map(i => (i.player_id === champIndex.playerId ? { ...i, champion: true } : i)),
+      results: item.results.map(i => (i.playerId === champIndex.playerId ? { ...i, champion: true } : i)),
     };
   });
   dispatch(setRating(result));
@@ -44,7 +44,7 @@ const RatingReducer = (state = initState, action) => {
     case SET_RATING_DETAILED:
       return {
         ...state,
-        items: state.items.map(item => (item.game_id === action.gameId)
+        items: state.items.map(item => (item.gameId === action.gameId)
           ? {...item,
              detailed: action.data,
             }
@@ -53,7 +53,7 @@ const RatingReducer = (state = initState, action) => {
     case COLLAPSE_RATING_DETAILED:
       return {
         ...state,
-        items: state.items.map(item => (item.game_id === action.gameId) ? {...item, detailed: null} : item),
+        items: state.items.map(item => (item.gameId === action.gameId) ? {...item, detailed: null} : item),
       }
     default:
       return state;

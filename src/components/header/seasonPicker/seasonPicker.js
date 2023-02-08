@@ -20,7 +20,7 @@ const SeasonPicker = ({ season, allSeasons, setSeason }) => {
 
   return (
     <WrapperClickOutside closeCallback={() => setIsEditing(false)}>
-      <div className="season-picker" onClick={() => setIsEditing(true)}>
+      <div className={`season-picker ${isEditing ? `open` : `closed`}`} onClick={() => setIsEditing(true)}>
         {season}
         {isEditing
         && (
