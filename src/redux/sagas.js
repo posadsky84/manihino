@@ -14,5 +14,5 @@ function* watcherGetPlaysDetailed() {
 export default function* rootSaga() {
   yield all([
     watcherGetPlaysDetailed(),
-  ])
-};
+  ]);
+}

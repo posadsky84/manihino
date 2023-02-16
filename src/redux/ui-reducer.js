@@ -12,7 +12,7 @@ export const getAllSeasonsThunk = () => async dispatch => {
 };
 
 export const addPlayThunk = (data, callback) => async () => {
-  const response = await API.addPlay(data);
+  await API.addPlay(data);
   callback();
 };
 

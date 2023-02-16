@@ -1,0 +1,73 @@
+name: ci-checks
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  install-job:
+    name: Install dependencies
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - uses: c-hive/gha-npm-cache@v1
+      - name: Install dependencies
+        run: npm ci
+
+#  typecheck-job:
+#    name: Typecheck
+#    needs: install-job
+#    runs-on: ubuntu-22.04
+#    steps:
+#      - name: Check out repository
+#        uses: actions/checkout@v3
+#      - uses: actions/setup-node@v3
+#        with:
+#          node-version: '18'
+#          cache: 'npm'
+#      - uses: c-hive/gha-npm-cache@v1
+#      - name: Install dependencies
+#        run: npm ci
+#      - name: Typecheck
+#        run: npm run typecheck
+
+  lint-job:
+    name: Lint
+    needs: install-job
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - uses: c-hive/gha-npm-cache@v1
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint:check
+
+  build-job:
+    name: Build
+    needs: install-job
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - uses: c-hive/gha-npm-cache@v1
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build

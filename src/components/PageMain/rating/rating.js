@@ -42,7 +42,7 @@ class Rating extends React.Component {
         </div>
         {this.props.rating.items.map(i => (
           <div>
-            <div className="tabrow" onClick={() => this.onGameClick(i)} key={i.gameId}>
+            <div className="tabrow" key={i.gameId} onClick={() => this.onGameClick(i)}>
               <div className="gamename">
                 {i.gameName}
                 <span className="cnt-span">{i.cnt}</span>
