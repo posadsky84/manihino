@@ -18,6 +18,9 @@ const reducers = combineReducers({
   calendar: calendarReducer,
 });
 
+/**
+ * если в названии функции есть legacy, то возможно ее лучше не трогать)
+ */
 const store = legacy_createStore(reducers, applyMiddleware(thunkMiddleware, sagaMiddleware));
 sagaMiddleware.run(rootSaga);
 

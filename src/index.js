@@ -7,6 +7,11 @@ import {Provider} from "react-redux";
 import store from "./redux/store";
 import { BrowserRouter } from 'react-router-dom';
 
+/**
+ * Лучше исправлять ошибки и варнинги которые появляются в консоли
+ * Можно завести общие компоненты, типа Modal, Popup, Button
+ * Есть возможность брать их из готовых библиотек типа mui
+ */
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
