@@ -1,4 +1,7 @@
 /* eslint-disable max-len */
+/**
+ * Иконки обычно выносят в /public
+ */
 const LogoImage = () => (
   <svg width="178" height="41" viewBox="0 0 178 41" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path

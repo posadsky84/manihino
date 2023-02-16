@@ -18,8 +18,9 @@ const GamesDropDown = ({ games, gameId, setFieldValue }) => {
   return (
     <WrapperClickOutside closeCallback={() => setIsEditing(false)}>
       <div className="games-input" onClick={() => setIsEditing(true)}>
-        {games.find(item => item.id === gameId)?.name}
+        {games.find(item => item.id === gameId)?.name} {/* можно вынести в useMemo */}
       </div>
+      {/* попап, можно вынести в общий компонент */}
       {isEditing
         && (
           <div className="games-drop-down">

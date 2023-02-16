@@ -7,6 +7,8 @@ import LogoImage from './logoImage';
 import NewPlayIcon from './newPlayIcon';
 
 const Header = ({ reloadFunc }) => {
+    // этот стейт и всю кнопку добавления партии лучше вынести в отдельный компонент
+    // т.е. хедеру не обязательно хранить ее стейт
   const [showModal, setShowModal] = useState(false);
   return (
     <div className="header">
@@ -35,6 +37,7 @@ const Header = ({ reloadFunc }) => {
       <div className="post-new-play-btn" onClick={() => setShowModal(true)}>
         <NewPlayIcon />
         <div className="post-new-play-lbl">{`Добавить\nпартию`}</div>
+          {/* модалки лучше рендерить через createPortal и через какой нибудь общий компонент */}
         {showModal && <PostNewPlay reloadFunc={reloadFunc} setShowModal={setShowModal} />}
       </div>
 

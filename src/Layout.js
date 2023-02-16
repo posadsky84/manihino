@@ -13,12 +13,31 @@ import { getFullStoryThunk } from './redux/fullStory-reducer';
 import { getAllSeasonsThunk } from './redux/ui-reducer';
 
 const Layout = props => {
+
+    /**
+     * Такие кусочки кода можно выносить в отдельные хуки, и как нибудь более читаемо называть
+     * Например если здесь фетчятся данные для инициализации, то назвать хук useInitializer()
+     */
   useEffect(() => {
     props.setPlayersThunk();
     props.setGamesThunk();
     props.getAllSeasonsThunk();
   }, []);
 
+    /**
+     *  можно завернуть в useMemo
+     *  и вместо switch case можно использовать объект типа
+     *  const funcByPathnameMap: Record<'/' | '/fullStory' | '/calendar', () => void> = {
+     *      '/': props.setRatingThunk,
+     *      '/fullStory': props.getFullStoryThunk,
+     *      '/calendar': props.getCalendarThunk,
+     *  };
+     *  const location = useLocation();
+     *  const reloadFunc = funcByPathnameMap[location.pathname];
+     *
+     *  особенно хорошо такие объекты заводить c тайпскриптом, потому что
+     *  если добавится какой нибудь новый роут, то всплывет подсказка что в этом мапе нужно его обработать
+     */
   let reloadFunc;
   switch (useLocation().pathname) {
     case `/`:
@@ -32,6 +51,11 @@ const Layout = props => {
       break;
   }
 
+    /**
+     *  эту логику обычно разделяют на 2 компонента
+     *  - <App/> - для роутов и общих настроек
+     *  - <Page/> - там уже прописывают layout (хедер, футер и тп)
+     */
   return (
     <div className="app-wrapper">
       <Header reloadFunc={reloadFunc} />

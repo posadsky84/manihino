@@ -80,6 +80,13 @@ const PlayersArea = ({ players }) => {
   }, [formikProps.values.scores]);
 
   // TODO Нужно завернуть в useCallback
+  /**
+   * useCallback лучше использовать если функция будет сравниваться по референсу
+   * например если использовать ее так onClick={(e) => uncheckOnClick(e, item.id)}, то от useCallback нет никакой пользы, зато он займет лишней памяти
+   * а если функция будет использоваться так onClick={uncheckOnClick} или будет передаваться в массив зависимостей, то нужен будет useCallback
+   *
+   * можно попробовать вынести все что после "players.map(item => (" в отдельный компонент и внутри него вызвать useCallback
+   */
   const uncheckOnClick = (e, itemId) => {
     if (+formikProps.values.winner === +itemId) {
       e.preventDefault();

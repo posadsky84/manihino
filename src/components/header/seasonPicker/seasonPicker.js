@@ -20,13 +20,16 @@ const SeasonPicker = ({ season, allSeasons, setSeason }) => {
 
   return (
     <WrapperClickOutside closeCallback={() => setIsEditing(false)}>
+      {/* для кнопок лучше использовать тег button */}
       <div className={`season-picker ${isEditing ? `open` : `closed`}`} onClick={() => setIsEditing(true)}>
         {season}
+        {/* для таких компонентов лучше завести какой нибудь отдельный компонент Popup */}
+        {/* и сам попап рендерить через createPortal, чтобы его точно ничего не перекрывало */}
         {isEditing
         && (
         <div className="season-picker-list">
           {allSeasons
-            .map(item => <div className="season-picker-item" onClick={e => setSeasonAndClose(e, item)}>{item}</div>)}
+            .map(item => <div className="season-picker-item" onClick={e => setSeasonAndClose(e, item)}>{item}</div>)} {/* key */}
         </div>
         )}
       </div>
