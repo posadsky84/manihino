@@ -17,7 +17,7 @@ const Layout = props => {
     props.setPlayersThunk();
     props.setGamesThunk();
     props.getAllSeasonsThunk();
-  }, []);
+  }, [props]);
 
   let reloadFunc;
   switch (useLocation().pathname) {
@@ -30,6 +30,8 @@ const Layout = props => {
     case `/calendar`:
       reloadFunc = props.getCalendarThunk;
       break;
+    default:
+      throw new Error(`Not implemented`);
   }
 
   return (

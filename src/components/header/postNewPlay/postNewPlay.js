@@ -36,6 +36,7 @@ const onSubmit = (
   values,
   reloadFunc,
   setShowModal,
+  // eslint-disable-next-line no-shadow
   addPlayThunk,
 ) => {
   const data = {
@@ -77,6 +78,7 @@ const PlayersArea = ({ players }) => {
   useEffect(() => {
     const curWinner = formikProps.values.scores.indexOf(Math.max(...formikProps.values.scores)) + 1;
     formikProps.setFieldValue(`winner`, `${curWinner}`);
+    // eslint-disable-next-line
   }, [formikProps.values.scores]);
 
   // TODO Нужно завернуть в useCallback

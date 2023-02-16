@@ -1,4 +1,4 @@
-import { API } from "../api";
+import { API } from '../api';
 
 const SELECT_DAY = `SELECT_DAY`;
 const SET_CALENDAR = `SET_CALENDAR`;

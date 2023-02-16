@@ -32,11 +32,11 @@ const Header = ({ reloadFunc }) => {
       </nav>
       <div className="header-bar">
         <SeasonPicker />
-      <div className="post-new-play-btn" onClick={() => setShowModal(true)}>
-        <NewPlayIcon />
-        <div className="post-new-play-lbl">{`Добавить\nпартию`}</div>
-        {showModal && <PostNewPlay reloadFunc={reloadFunc} setShowModal={setShowModal} />}
-      </div>
+        <div className="post-new-play-btn" onClick={() => setShowModal(true)}>
+          <NewPlayIcon />
+          <div className="post-new-play-lbl">{`Добавить\nпартию`}</div>
+          {showModal && <PostNewPlay reloadFunc={reloadFunc} setShowModal={setShowModal} />}
+        </div>
 
       </div>
     </div>
