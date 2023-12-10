@@ -11,7 +11,7 @@ import {
   ErrorMessage,
   useFormikContext,
 } from 'formik';
-import WinnerIcon from '../../../winnerIcon';
+import {WinnerIcon} from '../../../icons';
 import GamesDropDown from './gamesDropDown/gamesDropDown';
 import { addPlayThunk } from '../../../redux/ui-reducer';
 import WrapperClickOutside from '../../../helpers/wrapperClickOutside';

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import PostNewPlay from './postNewPlay/postNewPlay';
 import SeasonPicker from './seasonPicker/seasonPicker';
 import LogoImage from './logoImage';
-import NewPlayIcon from './newPlayIcon';
+import {NewPlayIcon} from '../../icons';
 
 const Header = ({ reloadFunc }) => {
   const [showModal, setShowModal] = useState(false);

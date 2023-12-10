@@ -101,6 +101,8 @@
 }
 
 .rating-detail-ddate {
+    display: flex;
+    align-items: end;
     box-sizing: border-box;
     width: 276px;
     margin-left: 24px;
@@ -167,4 +169,13 @@
     font-size: 12px;
     margin-left: 6px;
     font-variant-numeric: tabular-nums;
+}
+
+.rating-detail-ddate-comm {
+    opacity: 0;
+    margin-left: 5px;
+}
+
+.rating-detail-ddate:hover .rating-detail-ddate-comm {
+    opacity: 1;
 }

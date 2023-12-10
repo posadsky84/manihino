@@ -2,7 +2,7 @@ import './rating.css';
 import { connect } from 'react-redux';
 import React from 'react';
 import { collapseRatingDetailed, getRatingDetailed, setRatingThunk } from '../../../redux/rating-reducer';
-import WinnerIcon from '../../../winnerIcon';
+import { CommentIcon, WinnerIcon } from '../../../icons';
 
 const mapStateToProps = state => ({
   players: state.players.items,
@@ -62,6 +62,9 @@ class Rating extends React.Component {
                   </span>
                   <span className="rating-detail-comm-span">{ddItem.comment}</span>
                   {!ddItem.counts && <span className="fullstory-span-counts">вне зачета</span>}
+                  <div className="rating-detail-ddate-comm">
+                    <CommentIcon />
+                  </div>
                 </div>
                 {this.props.players.map(pItem => {
                   const resItem = ddItem.results.find(k => k.playerId === pItem.id);
