@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import React from 'react';
 import { collapseRatingDetailed, getRatingDetailed, setRatingThunk } from '../../../redux/rating-reducer';
 import { CommentIcon, WinnerIcon } from '../../../icons';
+import { setCommentaryOpen } from '../../../redux/ui-reducer';
 
 const mapStateToProps = state => ({
   players: state.players.items,
   rating: state.rating,
   ui: state.ui,
-  test: state.rating.items,
 });
 
 class Rating extends React.Component {
@@ -32,9 +32,12 @@ class Rating extends React.Component {
     }
   };
 
+  onCommentClick = item => {
+    this.props.setCommentaryOpen(item.gameId);
+  }
+
   render() {
     return (
-
       <div className="rating">
         <div className="headrow">
           <div className="gamename" />
@@ -62,7 +65,7 @@ class Rating extends React.Component {
                   </span>
                   <span className="rating-detail-comm-span">{ddItem.comment}</span>
                   {!ddItem.counts && <span className="fullstory-span-counts">вне зачета</span>}
-                  <div className="rating-detail-ddate-comm">
+                  <div className="rating-detail-ddate-comm" onClick={() => this.onCommentClick(ddItem)}>
                     <CommentIcon />
                   </div>
                 </div>
@@ -87,4 +90,5 @@ export default connect(mapStateToProps, {
   setRatingThunk,
   getRatingDetailed,
   collapseRatingDetailed,
+  setCommentaryOpen,
 })(Rating);

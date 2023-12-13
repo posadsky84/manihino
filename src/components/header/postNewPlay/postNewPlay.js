@@ -14,7 +14,7 @@ import {
 import {WinnerIcon} from '../../../icons';
 import GamesDropDown from './gamesDropDown/gamesDropDown';
 import { addPlayThunk } from '../../../redux/ui-reducer';
-import WrapperClickOutside from '../../../helpers/wrapperClickOutside';
+import ModalScreen from '../../../helpers/modalScreen';
 
 registerLocale(`ru`, ru);
 
@@ -121,9 +121,7 @@ const PostNewPlay = ({
   reloadFunc,
   addPlay,
 }) => (
-  <div className="modal-back">
-    <WrapperClickOutside closeCallback={() => setShowModal(false)}>
-      <div className="post-new-play-modal">
+    <ModalScreen closeCallback={() => setShowModal(false)}>
         <div className="post-new-play-caption">Добавить партию</div>
         <Formik
           initialValues={initialValues}
@@ -183,9 +181,6 @@ const PostNewPlay = ({
             <button className="post-new-play-button" type="submit">Добавить</button>
           </Form>
         </Formik>
-      </div>
-    </WrapperClickOutside>
-  </div>
+    </ModalScreen>
 );
-
 export default connect(mapStateToProps, { addPlay: addPlayThunk })(PostNewPlay);
