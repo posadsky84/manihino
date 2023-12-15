@@ -1,0 +1,22 @@
+.comm {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+}
+
+.comm-head-area {
+    height: 60px;
+}
+
+.comm-chat-area {
+    display: flex;
+    height: 10px;
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+
+.comm-post-area {
+    height: 60px;
+}
+
