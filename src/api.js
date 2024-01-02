@@ -28,4 +28,7 @@ export const API = {
   getAllSeasons() {
     return instance.get(`/allSeasons`);
   },
+  login(login, password) {
+    return instance.post(`/manihino-login`, {login, password});
+  }
 };

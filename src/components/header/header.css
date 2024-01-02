@@ -2,7 +2,7 @@
     position: fixed;
     background-color: white;
     display: grid;
-    grid-template-columns: 300px auto 300px;
+    grid-template-columns: 300px auto 400px;
     height: 80px;
     align-items: center;
     width: 100%;
@@ -94,4 +94,11 @@
     justify-content: space-between;
     align-items: center;
 
+}
+
+.auth-block {
+    display: flex;
+    width: 400px;
+    height: 50px;
+    flex-shrink: 0;
 }

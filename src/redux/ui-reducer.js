@@ -4,6 +4,14 @@ const SET_SEASON = `SET_SEASON`;
 const SET_ALLSEASONS = `SET_ALLSEASONS`;
 const SET_COMMETARY_OPEN = `SET_COMMETARY_OPEN`;
 const SET_COMMETARY_CLOSE = `SET_COMMETARY_CLOSE`;
+const SET_LOGIN = `SET_LOGIN`;
+
+export const loginThunk = (login, password) => async dispatch => {
+  const response = await API.login(login, password);
+  dispatch(setLogin(response.data));
+};
+
+const setLogin = data => ({type: SET_LOGIN, data});
 
 export const setSeason = season => ({ type: SET_SEASON, season });
 const setAllSeasons = allSeasons => ({ type: SET_ALLSEASONS, allSeasons });
@@ -27,10 +35,18 @@ const initState = {
   allSeasons: [],
   isCommentaryModalOpen: false,
   playIdForCommentary: null,
+  loginName: null,
 };
 
 const uiReducer = (state = initState, action) => {
   switch (action.type) {
+    case SET_LOGIN: {
+      console.log("Ну мы РЕАЛЬНО залогинились нахер: " + action.data.loginName);
+      return {
+        ...state,
+        loginName: action.data.loginName,
+      };
+    }
     case SET_SEASON: {
       return {
         ...state,
