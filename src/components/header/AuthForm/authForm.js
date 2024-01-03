@@ -22,8 +22,7 @@ const initialValues = {
 const AuthForm = ({loginThunk, closeCallback}) => {
 
   const onSubmit = (values) => {
-    console.log(values.login+"  ;  "+values.pass);
-    loginThunk({login: values.login, password: values.pass});
+    loginThunk(values.login, values.pass, closeCallback);
   };
 
   return (
@@ -31,7 +30,7 @@ const AuthForm = ({loginThunk, closeCallback}) => {
       {/*<div className="post-new-play-caption">ВОЙТИ</div>*/}
       <Formik
         initialValues={initialValues}
-        onSubmit={values => onSubmit(values)}
+        onSubmit={onSubmit}
       >
       <Form>
         <div className="post-new-play-input-block">

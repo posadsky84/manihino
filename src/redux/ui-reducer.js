@@ -4,14 +4,41 @@ const SET_SEASON = `SET_SEASON`;
 const SET_ALLSEASONS = `SET_ALLSEASONS`;
 const SET_COMMETARY_OPEN = `SET_COMMETARY_OPEN`;
 const SET_COMMETARY_CLOSE = `SET_COMMETARY_CLOSE`;
-const SET_LOGIN = `SET_LOGIN`;
+const SET_USER = `SET_USER`;
 
-export const loginThunk = (login, password) => async dispatch => {
-  const response = await API.login(login, password);
-  dispatch(setLogin(response.data));
+export const loginThunk = (login, password, onSuccess) => async dispatch => {
+  try {
+    const response = await API.login(login, password);
+    if (response.status === 200) {
+      localStorage.setItem(`token`, response.data.token);
+    } else if (response.status === 401) {
+      //неверный логин и пароль
+    } else {
+      //неизвестная ошибка
+    }
+    const response2 = await API.currentUser();
+    if (response2.status === 200) {
+      dispatch(setUser(response2.data));
+      onSuccess();
+    } else {
+
+    }
+
+  } catch (error) {
+
+  }
 };
 
-const setLogin = data => ({type: SET_LOGIN, data});
+export const currentUserThunk = () => async dispatch => {
+  const response2 = await API.currentUser();
+  if (response2.status === 200) {
+    dispatch(setUser(response2.data));
+  } else {
+
+  }
+}
+
+const setUser = data => ({type: SET_USER, data});
 
 export const setSeason = season => ({ type: SET_SEASON, season });
 const setAllSeasons = allSeasons => ({ type: SET_ALLSEASONS, allSeasons });
@@ -40,8 +67,7 @@ const initState = {
 
 const uiReducer = (state = initState, action) => {
   switch (action.type) {
-    case SET_LOGIN: {
-      console.log("Ну мы РЕАЛЬНО залогинились нахер: " + action.data.loginName);
+    case SET_USER: {
       return {
         ...state,
         loginName: action.data.loginName,

@@ -45,8 +45,9 @@ const Header = ({ ui, reloadFunc }) => {
           {showModal && <PostNewPlay reloadFunc={reloadFunc} setShowModal={setShowModal}/>}
         </div>
         <div className="auth-block">
-          <div className="post-new-play-btn" onClick={() => setShowLogin(true)}>Войти</div>
-          <div>{ui.loginName}</div>
+          {ui.loginName
+            ? <div>{ui.loginName}</div>
+            : <div className="post-new-play-btn" onClick={() => setShowLogin(true)}>Войти</div>}
           {showLogin && <AuthForm closeCallback={() => setShowLogin(false)}/>}
         </div>
 

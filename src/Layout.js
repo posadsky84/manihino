@@ -10,7 +10,7 @@ import { setPlayersThunk, setGamesThunk } from './redux/players-reducer';
 import { getCalendarThunk } from './redux/calendar-reducer';
 import { setRatingThunk } from './redux/rating-reducer';
 import { getFullStoryThunk } from './redux/fullStory-reducer';
-import { getAllSeasonsThunk, setCommentaryClose } from './redux/ui-reducer';
+import { currentUserThunk, getAllSeasonsThunk, setCommentaryClose } from './redux/ui-reducer';
 import Commentary from './components/Commentary/commentary';
 
 const mapStateToProps = state => ({
@@ -19,6 +19,7 @@ const mapStateToProps = state => ({
 
 const Layout = props => {
   useEffect(() => {
+    if (localStorage.getItem(`token`)) props.currentUserThunk();
     props.setPlayersThunk();
     props.setGamesThunk();
     props.getAllSeasonsThunk();
@@ -63,5 +64,6 @@ export default connect(
     getFullStoryThunk,
     getAllSeasonsThunk,
     setCommentaryClose,
+    currentUserThunk,
   },
 )(Layout);

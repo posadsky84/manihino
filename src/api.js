@@ -6,6 +6,15 @@ const instance = axios.create({
   timeout: 15000,
 });
 
+instance.interceptors.request.use(req => {
+  //Заменить на "содержит"
+  if (!req.url.startsWith(`manihino-login`)) {
+    const token = localStorage.getItem(`token`);
+    req.headers.Authorization = `${token}`;
+  }
+   return req;
+});
+
 export const API = {
   getRating(season) {
     return instance.get(`/rating?season=${season}`);
@@ -30,5 +39,8 @@ export const API = {
   },
   login(login, password) {
     return instance.post(`/manihino-login`, {login, password});
+  },
+  currentUser() {
+    return instance.get(`/manihino-user-current`);
   }
 };
