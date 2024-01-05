@@ -5,6 +5,13 @@ const SET_ALLSEASONS = `SET_ALLSEASONS`;
 const SET_COMMETARY_OPEN = `SET_COMMETARY_OPEN`;
 const SET_COMMETARY_CLOSE = `SET_COMMETARY_CLOSE`;
 const SET_USER = `SET_USER`;
+const LOGOUT_USER = `LOGOUT_USER`;
+const SET_COMMENTARY_LIST = `SET_COMMENTARY_LIST`;
+
+export const logoutThunk = () => async dispatch => {
+  localStorage.removeItem(`token`);
+  dispatch(logoutUser());
+}
 
 export const loginThunk = (login, password, onSuccess) => async dispatch => {
   try {
@@ -39,6 +46,8 @@ export const currentUserThunk = () => async dispatch => {
 }
 
 const setUser = data => ({type: SET_USER, data});
+const logoutUser = () => ({type: LOGOUT_USER});
+
 
 export const setSeason = season => ({ type: SET_SEASON, season });
 const setAllSeasons = allSeasons => ({ type: SET_ALLSEASONS, allSeasons });
@@ -53,6 +62,12 @@ export const addPlayThunk = (data, callback) => async () => {
   callback();
 };
 
+export const getCommentaryThunk = playId => async dispatch => {
+  const response = await API.getCommentary(playId);
+  dispatch(setCommentaryList(response.data));
+};
+
+const setCommentaryList = list => ({type: SET_COMMENTARY_LIST, list});
 
 export const setCommentaryOpen = playIdForCommentary => ({type: SET_COMMETARY_OPEN, playIdForCommentary});
 export const setCommentaryClose = () => ({type: SET_COMMETARY_CLOSE});
@@ -60,9 +75,13 @@ export const setCommentaryClose = () => ({type: SET_COMMETARY_CLOSE});
 const initState = {
   season: new Date().getFullYear(),
   allSeasons: [],
-  isCommentaryModalOpen: false,
-  playIdForCommentary: null,
+  commentary: {
+    isModalOpen: false,
+    playId: null,
+    list: [],
+  },
   loginName: null,
+  ava: null,
 };
 
 const uiReducer = (state = initState, action) => {
@@ -71,7 +90,14 @@ const uiReducer = (state = initState, action) => {
       return {
         ...state,
         loginName: action.data.loginName,
+        ava: action.data.ava,
       };
+    }
+    case LOGOUT_USER: {
+      return {
+        ...state,
+        loginName: null,
+      }
     }
     case SET_SEASON: {
       return {
@@ -88,15 +114,28 @@ const uiReducer = (state = initState, action) => {
     case SET_COMMETARY_OPEN: {
       return {
         ...state,
-        isCommentaryModalOpen: true,
-        playIdForCommentary: action.playIdForCommentary,
+        commentary: {
+          ...initState.commentary,
+          isModalOpen: true,
+        },
+
+      }
+    }
+    case SET_COMMENTARY_LIST: {
+      return {
+        ...state,
+        commentary: {
+          ...state.commentary,
+          list: action.list,
+        },
       }
     }
     case SET_COMMETARY_CLOSE: {
       return {
         ...state,
-        isCommentaryModalOpen: false,
-        playIdForCommentary: null,
+        commentary: {
+          ...initState.commentary,
+        },
       }
     }
     default:

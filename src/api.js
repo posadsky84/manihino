@@ -37,6 +37,9 @@ export const API = {
   getAllSeasons() {
     return instance.get(`/allSeasons`);
   },
+  getCommentary(playId) {
+    return instance.get(`/commentary?playId=${playId}`);
+  },
   login(login, password) {
     return instance.post(`/manihino-login`, {login, password});
   },

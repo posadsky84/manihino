@@ -7,12 +7,13 @@ import LogoImage from './logoImage';
 import { NewPlayIcon } from '../../icons';
 import AuthForm from './AuthForm/authForm';
 import { connect } from 'react-redux';
+import { logoutThunk } from '../../redux/ui-reducer';
 
 const mapStateToProps = state => ({
   ui: state.ui,
 });
 
-const Header = ({ ui, reloadFunc }) => {
+const Header = ({ ui, reloadFunc, logoutThunk }) => {
   const [showModal, setShowModal] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   return (
@@ -46,7 +47,9 @@ const Header = ({ ui, reloadFunc }) => {
         </div>
         <div className="auth-block">
           {ui.loginName
-            ? <div>{ui.loginName}</div>
+            ? <div>{ui.loginName}    <div style={{cursor: 'pointer'}} onClick={logoutThunk}>Выход</div>
+              <div><img height="32" width="32" src={`data:image/jpg;base64,${ui.ava}`} alt="ava"/></div>
+              </div>
             : <div className="post-new-play-btn" onClick={() => setShowLogin(true)}>Войти</div>}
           {showLogin && <AuthForm closeCallback={() => setShowLogin(false)}/>}
         </div>
@@ -56,4 +59,4 @@ const Header = ({ ui, reloadFunc }) => {
   );
 };
 
-export default connect(mapStateToProps, {})(Header);
+export default connect(mapStateToProps, {logoutThunk})(Header);

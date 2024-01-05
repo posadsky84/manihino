@@ -41,7 +41,7 @@ const Layout = props => {
   return (
     <div className="app-wrapper">
       <Header reloadFunc={reloadFunc} />
-      {props.ui.isCommentaryModalOpen && <Commentary closeCallback={props.setCommentaryClose} />}
+      {props.ui.commentary.isModalOpen && <Commentary closeCallback={props.setCommentaryClose} />}
       <div className="main-area">
         <Routes>
           <Route element={<PageMain />} path="/" />

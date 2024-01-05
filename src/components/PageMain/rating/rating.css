@@ -178,6 +178,14 @@
     cursor: pointer;
 }
 
+.rating-detail-ddate-comm.exist {
+    opacity: 1;
+}
+
 .rating-detail-ddate:hover .rating-detail-ddate-comm {
     opacity: 1;
+}
+
+.comm-icon-exist path{
+    fill: blue;
 }

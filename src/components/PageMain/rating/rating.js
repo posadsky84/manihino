@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import { collapseRatingDetailed, getRatingDetailed, setRatingThunk } from '../../../redux/rating-reducer';
 import { CommentIcon, WinnerIcon } from '../../../icons';
-import { setCommentaryOpen } from '../../../redux/ui-reducer';
+import { getCommentaryThunk, setCommentaryOpen } from '../../../redux/ui-reducer';
 
 const mapStateToProps = state => ({
   players: state.players.items,
@@ -33,7 +33,8 @@ class Rating extends React.Component {
   };
 
   onCommentClick = item => {
-    this.props.setCommentaryOpen(item.gameId);
+    this.props.setCommentaryOpen(item.playId);
+    this.props.getCommentaryThunk(item.playId);
   }
 
   render() {
@@ -65,8 +66,8 @@ class Rating extends React.Component {
                   </span>
                   <span className="rating-detail-comm-span">{ddItem.comment}</span>
                   {!ddItem.counts && <span className="fullstory-span-counts">вне зачета</span>}
-                  <div className="rating-detail-ddate-comm" onClick={() => this.onCommentClick(ddItem)}>
-                    <CommentIcon />
+                  <div className={`rating-detail-ddate-comm${ddItem.commCount > 0 ? `.exist` : ``}`} onClick={() => this.onCommentClick(ddItem)}>
+                    <CommentIcon className={ddItem.commCount > 0 ? `comm-icon-exist` : ``} />
                   </div>
                 </div>
                 {this.props.players.map(pItem => {
@@ -91,4 +92,5 @@ export default connect(mapStateToProps, {
   getRatingDetailed,
   collapseRatingDetailed,
   setCommentaryOpen,
+  getCommentaryThunk
 })(Rating);
