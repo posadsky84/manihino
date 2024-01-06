@@ -1,14 +1,11 @@
 import React from 'react';
 import ModalScreen from '../../../helpers/modalScreen';
-import "./authForm.css";
 import { connect } from 'react-redux';
 
 import {
   Formik,
   Form,
   Field,
-  ErrorMessage,
-  useFormikContext,
 } from 'formik';
 import { loginThunk } from '../../../redux/ui-reducer';
 
