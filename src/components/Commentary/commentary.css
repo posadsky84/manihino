@@ -1,4 +1,4 @@
-.comm {
+.comm-box {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -6,17 +6,58 @@
 }
 
 .comm-head-area {
-    height: 60px;
+    height: 100px;
+    background-color: gainsboro;
+    padding: 5px;
 }
 
 .comm-chat-area {
     display: flex;
+    flex-direction: column;
     height: 10px;
     flex-grow: 1;
     flex-shrink: 0;
+    background-color: bisque;
+    overflow-y: scroll;
 }
 
 .comm-post-area {
     height: 60px;
+    background-color: linen;
+    display: flex;
 }
 
+.comm {
+    display: flex;
+    margin-top: 8px;
+}
+
+.comm-input {
+    background-color: skyblue;
+    border-radius: 8px;
+    height: 60px;
+    width: 400px;
+}
+
+.comm-post-button {
+    cursor: pointer;
+    border-style: dashed;
+}
+
+.comm-head-game-name {
+    font-weight: bold;
+}
+
+.comm-head-comment {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.comm-mini-table-row {
+    display: flex;
+}
+
+.comm-ava {
+    border-radius: 50%;
+    margin-right: 8px;
+}

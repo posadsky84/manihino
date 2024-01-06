@@ -45,12 +45,19 @@ const Header = ({ ui, reloadFunc, logoutThunk }) => {
           <div className="post-new-play-lbl">{`Добавить\nпартию`}</div>
           {showModal && <PostNewPlay reloadFunc={reloadFunc} setShowModal={setShowModal}/>}
         </div>
-        <div className="auth-block">
+        <div>
           {ui.loginName
-            ? <div>{ui.loginName}    <div style={{cursor: 'pointer'}} onClick={logoutThunk}>Выход</div>
-              <div><img height="32" width="32" src={`data:image/jpg;base64,${ui.ava}`} alt="ava"/></div>
+            ? <div className="auth-block">
+                <div className="user-block">
+                  <img className="ava-block" height="50" width="50" src={`data:image/jpg;base64,${ui.ava}`} alt="ava"/>
+                  <div className="">{ui.loginName}</div>
+                </div>
+                <div style={{cursor: 'pointer', marginLeft: "32px"}} onClick={logoutThunk}>Выход</div>
               </div>
-            : <div className="post-new-play-btn" onClick={() => setShowLogin(true)}>Войти</div>}
+            : <div className="auth-block">
+                <div className="login-btn" onClick={() => setShowLogin(true)}>Войти</div>
+              </div>
+              }
           {showLogin && <AuthForm closeCallback={() => setShowLogin(false)}/>}
         </div>
 

@@ -33,7 +33,7 @@ class Rating extends React.Component {
   };
 
   onCommentClick = item => {
-    this.props.setCommentaryOpen(item.playId);
+    this.props.setCommentaryOpen(item);
     this.props.getCommentaryThunk(item.playId);
   }
 

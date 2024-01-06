@@ -2,7 +2,7 @@
     position: fixed;
     background-color: white;
     display: grid;
-    grid-template-columns: 300px auto 400px;
+    grid-template-columns: 300px auto 480px;
     height: 80px;
     align-items: center;
     width: 100%;
@@ -98,7 +98,25 @@
 
 .auth-block {
     display: flex;
-    width: 400px;
+    width: 240px;
     height: 50px;
     flex-shrink: 0;
+    align-items: center;
+}
+
+.user-block {
+    display: flex;
+    align-items: center;
+}
+
+.ava-block {
+    margin-right: 5px;
+    border-radius: 50%;
+}
+
+.login-btn {
+    font-weight: bold;
+    font-size: 24px;
+    color: red;
+    cursor: pointer;
 }

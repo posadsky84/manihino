@@ -7,6 +7,7 @@ const SET_COMMETARY_CLOSE = `SET_COMMETARY_CLOSE`;
 const SET_USER = `SET_USER`;
 const LOGOUT_USER = `LOGOUT_USER`;
 const SET_COMMENTARY_LIST = `SET_COMMENTARY_LIST`;
+const ADD_COMMENTARY = `ADD_COMMENTARY`;
 
 export const logoutThunk = () => async dispatch => {
   localStorage.removeItem(`token`);
@@ -45,6 +46,19 @@ export const currentUserThunk = () => async dispatch => {
   }
 }
 
+export const addCommentaryThunk = (playId, text, clearCallback) => async dispatch => {
+  if (text) {
+    const response = await API.addCommentary({ playId, text });
+    if (response.status === 200) {
+      dispatch(addCommentary(response.data));
+    } else {
+
+    }
+  }
+  clearCallback();
+}
+
+const addCommentary = data => ({type: ADD_COMMENTARY, data});
 const setUser = data => ({type: SET_USER, data});
 const logoutUser = () => ({type: LOGOUT_USER});
 
@@ -69,7 +83,7 @@ export const getCommentaryThunk = playId => async dispatch => {
 
 const setCommentaryList = list => ({type: SET_COMMENTARY_LIST, list});
 
-export const setCommentaryOpen = playIdForCommentary => ({type: SET_COMMETARY_OPEN, playIdForCommentary});
+export const setCommentaryOpen = item => ({type: SET_COMMETARY_OPEN, item});
 export const setCommentaryClose = () => ({type: SET_COMMETARY_CLOSE});
 
 const initState = {
@@ -77,7 +91,7 @@ const initState = {
   allSeasons: [],
   commentary: {
     isModalOpen: false,
-    playId: null,
+    selectedItem: null,
     list: [],
   },
   loginName: null,
@@ -116,6 +130,7 @@ const uiReducer = (state = initState, action) => {
         ...state,
         commentary: {
           ...initState.commentary,
+          selectedItem: action.item,
           isModalOpen: true,
         },
 
@@ -135,6 +150,22 @@ const uiReducer = (state = initState, action) => {
         ...state,
         commentary: {
           ...initState.commentary,
+        },
+      }
+    }
+    case ADD_COMMENTARY: {
+      //console.log(action.data);
+      return {
+        ...state,
+        commentary: {
+          ...state.commentary,
+          list: [...state.commentary.list,
+                  {
+                   ddate: action.data.ddate,
+                   playerid: action.data.user_id,
+                   commtext: action.data.text,
+                  }
+                ]
         },
       }
     }

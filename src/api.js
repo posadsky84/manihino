@@ -40,6 +40,9 @@ export const API = {
   getCommentary(playId) {
     return instance.get(`/commentary?playId=${playId}`);
   },
+  addCommentary(data) {
+    return instance.post(`/addCommentary`, data);
+  },
   login(login, password) {
     return instance.post(`/manihino-login`, {login, password});
   },
