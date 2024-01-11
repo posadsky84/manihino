@@ -61,3 +61,11 @@
     border-radius: 50%;
     margin-right: 8px;
 }
+
+.comm-unread-block {
+    text-align: center;
+    background-color: white;
+    height: 16px;
+    color: grey;
+    font-size: 12px;
+}

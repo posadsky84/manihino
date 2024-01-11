@@ -46,7 +46,7 @@ class Rating extends React.Component {
         </div>
         {this.props.rating.items.map(i => (
           <div>
-            <div className="tabrow" onClick={() => this.onGameClick(i)} key={i.gameId}>
+            <div className={`tabrow ${i.unreads ? "row-unread" : ""}`} onClick={() => this.onGameClick(i)} key={i.gameId}>
               <div className="gamename">
                 {i.gameName}
                 <span className="cnt-span">{i.cnt}</span>
@@ -67,7 +67,9 @@ class Rating extends React.Component {
                   <span className="rating-detail-comm-span">{ddItem.comment}</span>
                   {!ddItem.counts && <span className="fullstory-span-counts">вне зачета</span>}
                   <div className={`rating-detail-ddate-comm${ddItem.commCount > 0 ? `.exist` : ``}`} onClick={() => this.onCommentClick(ddItem)}>
-                    <CommentIcon className={ddItem.commCount > 0 ? `comm-icon-exist` : ``} />
+                    <div className={`comm-icon-holder ${ddItem.unreads ? "play-unread" : ""}`}>
+                      <CommentIcon className={ddItem.commExist ? `comm-icon-exist` : ``} />
+                    </div>
                   </div>
                 </div>
                 {this.props.players.map(pItem => {

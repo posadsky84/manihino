@@ -43,6 +43,9 @@ export const API = {
   addCommentary(data) {
     return instance.post(`/addCommentary`, data);
   },
+  markCommAsRead(data) {
+    return instance.post(`/markCommAsRead`, data);
+  },
   login(login, password) {
     return instance.post(`/manihino-login`, {login, password});
   },

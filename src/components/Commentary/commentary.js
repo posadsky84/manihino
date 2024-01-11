@@ -38,11 +38,15 @@ const Commentary = ({closeCallback, commentary, players, loginName, addCommentar
            </div>
          </div>
          <div className="comm-chat-area">
-           {commentary.list.map(item =>
+           {commentary.list.map((item, index, arr) =>
+             <>
              <div className="comm">
-               <div><img className="comm-ava" height="36" width="36" src={`data:image/jpg;base64,${players.find(it => it.id === item.playerid).ava}`} alt="ava"/></div>
-               {item.commtext}
-             </div>)}
+               <div><img className="comm-ava" height="36" width="36" src={`data:image/jpg;base64,${players.find(it => it.id === item.playerId).ava}`} alt="ava"/></div>
+               {item.commText}
+             </div>
+             {(index < arr.length - 1) && !!item.lastReadFlag && <div className="comm-unread-block">Непрочитанные сообщения</div>}
+             </>)
+           }
            {!commentary.list.length && "Комментариев пока нет..."}
          </div>
 

@@ -79,6 +79,8 @@ export const addPlayThunk = (data, callback) => async () => {
 export const getCommentaryThunk = playId => async dispatch => {
   const response = await API.getCommentary(playId);
   dispatch(setCommentaryList(response.data));
+  const response2 = API.markCommAsRead({ playId });
+
 };
 
 const setCommentaryList = list => ({type: SET_COMMENTARY_LIST, list});
