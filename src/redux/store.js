@@ -21,4 +21,6 @@ const reducers = combineReducers({
 const store = legacy_createStore(reducers, applyMiddleware(thunkMiddleware, sagaMiddleware));
 sagaMiddleware.run(rootSaga);
 
+window.store = store;
+
 export default store;

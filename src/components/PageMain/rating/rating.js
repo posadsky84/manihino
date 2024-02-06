@@ -32,9 +32,9 @@ class Rating extends React.Component {
     }
   };
 
-  onCommentClick = item => {
-    this.props.setCommentaryOpen(item);
-    this.props.getCommentaryThunk(item.playId);
+  onCommentClick = (dItem, ddItem) => {
+    this.props.setCommentaryOpen(ddItem);
+    this.props.getCommentaryThunk(ddItem.playId, ddItem.gameId, dItem.ddate);
   }
 
   render() {
@@ -66,7 +66,7 @@ class Rating extends React.Component {
                   </span>
                   <span className="rating-detail-comm-span">{ddItem.comment}</span>
                   {!ddItem.counts && <span className="fullstory-span-counts">вне зачета</span>}
-                  <div className={`rating-detail-ddate-comm${ddItem.commCount > 0 ? `.exist` : ``}`} onClick={() => this.onCommentClick(ddItem)}>
+                  <div className={`rating-detail-ddate-comm${ddItem.commCount > 0 ? `.exist` : ``}`} onClick={() => this.onCommentClick(dItem, ddItem)}>
                     <div className={`comm-icon-holder ${ddItem.unreads ? "play-unread" : ""}`}>
                       <CommentIcon className={ddItem.commExist ? `comm-icon-exist` : ``} />
                     </div>

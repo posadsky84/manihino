@@ -15,7 +15,11 @@ const Commentary = ({closeCallback, commentary, players, loginName, addCommentar
   const [curComment, setCurComment] = useState("");
 
   const clearCallback = () => setCurComment("");
-  const postCommentary = () => addCommentaryThunk(commentary.selectedItem.playId, curComment, clearCallback);
+  const postCommentary = () => addCommentaryThunk(
+    commentary.selectedItem.playId,
+    curComment,
+    clearCallback
+  );
 
   return (
      <ModalScreen closeCallback={closeCallback} fullScreen>

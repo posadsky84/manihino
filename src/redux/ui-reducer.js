@@ -1,4 +1,5 @@
 import { API } from '../api';
+import { setCommentaryRead } from './rating-reducer';
 
 const SET_SEASON = `SET_SEASON`;
 const SET_ALLSEASONS = `SET_ALLSEASONS`;
@@ -76,11 +77,11 @@ export const addPlayThunk = (data, callback) => async () => {
   callback();
 };
 
-export const getCommentaryThunk = playId => async dispatch => {
+export const getCommentaryThunk = (playId, gameId, ddate) => async dispatch => {
   const response = await API.getCommentary(playId);
   dispatch(setCommentaryList(response.data));
-  const response2 = API.markCommAsRead({ playId });
-
+  const response2 = await API.markCommAsRead({ playId });
+  dispatch(setCommentaryRead(playId, gameId, ddate));
 };
 
 const setCommentaryList = list => ({type: SET_COMMENTARY_LIST, list});
@@ -156,16 +157,16 @@ const uiReducer = (state = initState, action) => {
       }
     }
     case ADD_COMMENTARY: {
-      //console.log(action.data);
       return {
         ...state,
         commentary: {
           ...state.commentary,
-          list: [...state.commentary.list,
+          list: [...state.commentary.list.map(item => ({...item, lastReadFlag: false})),
                   {
                    ddate: action.data.ddate,
-                   playerid: action.data.user_id,
-                   commtext: action.data.text,
+                   playerId: action.data.user_id,
+                   commText: action.data.text,
+                   lastReadFlag: false,
                   }
                 ]
         },
