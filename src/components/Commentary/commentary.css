@@ -7,7 +7,6 @@
 
 .comm-head-area {
     height: 100px;
-    background-color: gainsboro;
     padding: 5px;
 }
 
@@ -17,14 +16,13 @@
     height: 10px;
     flex-grow: 1;
     flex-shrink: 0;
-    background-color: bisque;
     overflow-y: scroll;
 }
 
 .comm-post-area {
-    height: 60px;
-    background-color: linen;
+    height: 76px;
     display: flex;
+    position: relative;
 }
 
 .comm {
@@ -32,16 +30,73 @@
     margin-top: 8px;
 }
 
-.comm-input {
-    background-color: skyblue;
+.comm.yours {
+    flex-direction: row-reverse;
+}
+
+.comm .comm-bubble {
+   position: relative;
+    background-color: #EEF0F1;
     border-radius: 8px;
-    height: 60px;
-    width: 400px;
+    border: solid 1px #F6F7F8;
+}
+
+.comm.yours .comm-bubble {
+    background-color: #FF6B00;
+
+
+}
+
+.comm-bubble:before {
+    display: flex;
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 20px;
+    transform: skewX(-45deg);
+    background-color: #EEF0F1;
+    border-left: solid 1px #F6F7F8;
+    border-bottom: solid 1px #F6F7F8;
+    bottom: -1px;
+    left: -8px;
+}
+
+.comm-bubble.yours:before {
+    background-color: #FF6B00;
+}
+
+.comm-caption {
+    display: flex;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: red;
+
+}
+
+.comm-body {
+    display: flex;
+    margin: 10px;
+}
+
+.comm-bubble.yours .comm-caption {
+    display: none;
+}
+
+
+.comm-input {
+    background-color: #F6F7F8;
+    border: 1px solid #EEF0F1;
+    border-radius: 8px;
+    width: 100%;
+    resize: none;
 }
 
 .comm-post-button {
     cursor: pointer;
-    border-style: dashed;
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
 }
 
 .comm-head-game-name {
@@ -58,6 +113,12 @@
 }
 
 .comm-ava {
+    display: flex;
+    align-items: end;
+    margin-right: 5px;
+}
+
+.comm-ava img {
     border-radius: 50%;
     margin-right: 8px;
 }

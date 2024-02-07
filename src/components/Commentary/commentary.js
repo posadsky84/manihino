@@ -3,14 +3,16 @@ import ModalScreen from '../../helpers/modalScreen';
 import "./commentary.css";
 import { connect } from 'react-redux';
 import { addCommentaryThunk } from '../../redux/ui-reducer';
+import { SendIcon } from '../../icons';
 
 const mapStateToProps = state => ({
   commentary: state.ui.commentary,
+  ui: state.ui,
   players: state.players.items,
   loginName: state.ui.loginName,
 });
 
-const Commentary = ({closeCallback, commentary, players, loginName, addCommentaryThunk}) => {
+const Commentary = ({closeCallback, commentary, ui, players, loginName, addCommentaryThunk}) => {
 
   const [curComment, setCurComment] = useState("");
 
@@ -25,7 +27,10 @@ const Commentary = ({closeCallback, commentary, players, loginName, addCommentar
      <ModalScreen closeCallback={closeCallback} fullScreen>
        <div className="comm-box">
          <div className="comm-head-area">
+          <div>
           <div className="comm-head-game-name">{commentary.selectedItem.gameName}</div>
+          <div className="comm-head-ddate">04.01</div>
+          </div>
            <div className="comm-head-comment">{commentary.selectedItem.comment}</div>
            <div className="comm-mini-table-row">
            {players.map(item => <div className="playerheader" key={item.name}>{item.name}</div>)}
@@ -42,11 +47,15 @@ const Commentary = ({closeCallback, commentary, players, loginName, addCommentar
            </div>
          </div>
          <div className="comm-chat-area">
+
            {commentary.list.map((item, index, arr) =>
              <>
-             <div className="comm">
-               <div><img className="comm-ava" height="36" width="36" src={`data:image/jpg;base64,${players.find(it => it.id === item.playerId).ava}`} alt="ava"/></div>
-               {item.commText}
+             <div className={`comm ${item.playerId === ui.playerId ? "yours" : ""}`}>
+               <div className="comm-ava"><img height="36" width="36" src={`data:image/jpg;base64,${players.find(it => it.id === item.playerId).ava}`} alt="ava"/></div>
+               <div className="comm-bubble">
+                 <div className="comm-caption">{item.playerName}</div>
+                 <div className="comm-body">{item.commText}</div>
+               </div>
              </div>
              {(index < arr.length - 1) && !!item.lastReadFlag && <div className="comm-unread-block">Непрочитанные сообщения</div>}
              </>)
@@ -64,7 +73,9 @@ const Commentary = ({closeCallback, commentary, players, loginName, addCommentar
                 if (e.key === `Enter`) postCommentary();
               }}
             />
-            <div className="comm-post-button" onClick={postCommentary}>пост -></div>
+            <div className="comm-post-button" onClick={postCommentary}>
+              <SendIcon />
+            </div>
          </div> :
            <div style={{"margin-top": "10px"}}>Нужно залогиниться, чтобы что-то пстить</div>
         }

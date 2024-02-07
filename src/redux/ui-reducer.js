@@ -98,6 +98,7 @@ const initState = {
     list: [],
   },
   loginName: null,
+  playerId: null,
   ava: null,
 };
 
@@ -107,6 +108,7 @@ const uiReducer = (state = initState, action) => {
       return {
         ...state,
         loginName: action.data.loginName,
+        playerId: action.data.id,
         ava: action.data.ava,
       };
     }
