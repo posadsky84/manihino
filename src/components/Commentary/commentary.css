@@ -8,6 +8,31 @@
 .comm-head-area {
     height: 100px;
     padding: 5px;
+    margin-bottom: 24px;
+}
+
+.comm-header {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+
+.comm-head-game-name {
+    margin-right: 8px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.comm-head-comment {
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: #676D71;
+}
+
+.comm-head-ddate {
+    font-size: 16px;
+    color: #B4BCC0;
+    font-weight: bold;
 }
 
 .comm-chat-area {
@@ -17,9 +42,11 @@
     flex-grow: 1;
     flex-shrink: 0;
     overflow-y: scroll;
+    padding: 0 5px;
 }
 
 .comm-post-area {
+    margin-top: 24px;
     height: 76px;
     display: flex;
     position: relative;
@@ -42,18 +69,19 @@
 }
 
 .comm.yours .comm-bubble {
-    background-color: #FF6B00;
+    background-color: #FF9242;
+    border: solid 1px #FF6B00;
 
 
 }
 
-.comm-bubble:before {
+.comm .comm-bubble:before {
     display: flex;
     position: absolute;
     content: "";
-    height: 14px;
-    width: 20px;
-    transform: skewX(-45deg);
+    height: 8px;
+    width: 24px;
+    transform: skewX(-60deg);
     background-color: #EEF0F1;
     border-left: solid 1px #F6F7F8;
     border-bottom: solid 1px #F6F7F8;
@@ -61,8 +89,14 @@
     left: -8px;
 }
 
-.comm-bubble.yours:before {
-    background-color: #FF6B00;
+.comm.yours .comm-bubble:before {
+    transform: skewX(60deg);
+    left: auto;
+    right: -9px;
+    border-left: none;
+    border-right: solid 1px #FF6B00;
+    border-bottom: solid 1px #FF6B00;
+    background-color: #FF9242;
 }
 
 .comm-caption {
@@ -70,16 +104,20 @@
     margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
-    color: red;
+    color: #FF6B00;
+    font-size: 12px;
+    font-weight: bold;
+
 
 }
 
 .comm-body {
     display: flex;
     margin: 10px;
+    font-size: 14px;
 }
 
-.comm-bubble.yours .comm-caption {
+.comm.yours .comm-bubble .comm-caption {
     display: none;
 }
 
@@ -99,15 +137,6 @@
     right: 4px;
 }
 
-.comm-head-game-name {
-    font-weight: bold;
-}
-
-.comm-head-comment {
-    font-size: 12px;
-    margin-bottom: 5px;
-}
-
 .comm-mini-table-row {
     display: flex;
 }
@@ -121,6 +150,11 @@
 .comm-ava img {
     border-radius: 50%;
     margin-right: 8px;
+}
+
+.comm.yours .comm-ava {
+    margin-right: 0;
+    margin-left: 12px;
 }
 
 .comm-unread-block {

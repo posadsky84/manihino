@@ -16,10 +16,10 @@ const initialValues = {
 };
 
 
-const AuthForm = ({loginThunk, closeCallback}) => {
+const AuthForm = ({loginThunk, closeCallback, reloadFunc}) => {
 
   const onSubmit = (values) => {
-    loginThunk(values.login, values.pass, closeCallback);
+    loginThunk(values.login, values.pass, closeCallback, reloadFunc);
   };
 
   return (

@@ -4,18 +4,21 @@ const SET_RATING = `SET_RATING`;
 const SET_RATING_DETAILED = 'SET_RATING_DETAILED`'
 const COLLAPSE_RATING_DETAILED = 'COLLAPSE_RATING_DETAILED';
 const SET_COMMENTARY_READ = 'SET_COMMENTARY_READ';
+const SET_COMMENTARY_ADD = 'SET_COMMENTARY_ADD';
 export const GET_RATING_DETAILED = 'GET_RATING_DETAILED';
 export const getRatingDetailed = (season, gameId) => ({type: GET_RATING_DETAILED, season, gameId});
 export const setRatingDetailed = (gameId, data) => ({type: SET_RATING_DETAILED, gameId, data});
 export const collapseRatingDetailed = gameId => ({type: COLLAPSE_RATING_DETAILED, gameId});
 const setRating = rating => ({ type: SET_RATING, rating });
 export const setCommentaryRead = (playId, gameId, ddate) => ({type: SET_COMMENTARY_READ, playId, gameId, ddate});
+export const setCommentaryAdd = (playId, gameId, ddate) => ({type: SET_COMMENTARY_ADD, playId, gameId, ddate});
 
 const initState = {
   items: [],
 };
 
 export const setRatingThunk = season => async dispatch => {
+  if (!season) season = 2024; //костыль. Надо убрать замыкание совсем
   const response = await API.getRating(season);
   const result = response.data.map(item => {
     const champIndex = item.results.reduce((res, i) => {
@@ -56,6 +59,27 @@ const RatingReducer = (state = initState, action) => {
       return {
         ...state,
         items: state.items.map(item => (item.gameId === action.gameId) ? {...item, detailed: null} : item),
+      }
+    case SET_COMMENTARY_ADD:
+      return {
+        ...state,
+        items: state.items.map(item => (item.gameId === action.gameId)
+          ? {...item,
+            detailed: item.detailed.map(dItem => (dItem.ddate === action.ddate)
+              ?
+                 {
+                  ddate: dItem.ddate,
+                  plays: dItem.plays.map(ddItem => (ddItem.playId === action.playId) ?
+                    {...ddItem,
+                        commExist: 1,
+                    }
+                   : ddItem
+                  )
+                }
+              : dItem
+            )
+          }
+          : item)
       }
     case SET_COMMENTARY_READ:
       let countUnreads = 0;

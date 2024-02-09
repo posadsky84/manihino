@@ -15,7 +15,7 @@ export const logoutThunk = () => async dispatch => {
   dispatch(logoutUser());
 }
 
-export const loginThunk = (login, password, onSuccess) => async dispatch => {
+export const loginThunk = (login, password, onSuccess, reloadFunc) => async dispatch => {
   try {
     const response = await API.login(login, password);
     if (response.status === 200) {
@@ -29,6 +29,7 @@ export const loginThunk = (login, password, onSuccess) => async dispatch => {
     if (response2.status === 200) {
       dispatch(setUser(response2.data));
       onSuccess();
+      reloadFunc();
     } else {
 
     }

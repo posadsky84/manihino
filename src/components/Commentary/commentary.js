@@ -4,6 +4,7 @@ import "./commentary.css";
 import { connect } from 'react-redux';
 import { addCommentaryThunk } from '../../redux/ui-reducer';
 import { SendIcon } from '../../icons';
+import { setCommentaryAdd } from '../../redux/rating-reducer';
 
 const mapStateToProps = state => ({
   commentary: state.ui.commentary,
@@ -12,24 +13,31 @@ const mapStateToProps = state => ({
   loginName: state.ui.loginName,
 });
 
-const Commentary = ({closeCallback, commentary, ui, players, loginName, addCommentaryThunk}) => {
+const Commentary = ({closeCallback, commentary, ui, players, loginName, addCommentaryThunk, setCommentaryAdd}) => {
 
   const [curComment, setCurComment] = useState("");
 
   const clearCallback = () => setCurComment("");
-  const postCommentary = () => addCommentaryThunk(
-    commentary.selectedItem.playId,
-    curComment,
-    clearCallback
-  );
+  const postCommentary = () => {
+    addCommentaryThunk(
+      commentary.selectedItem.playId,
+      curComment,
+      clearCallback
+    );
+    setCommentaryAdd(
+      commentary.selectedItem.playId,
+      commentary.selectedItem.gameId,
+      commentary.selectedItem.ddate,
+    );
+  };
 
   return (
      <ModalScreen closeCallback={closeCallback} fullScreen>
        <div className="comm-box">
          <div className="comm-head-area">
-          <div>
-          <div className="comm-head-game-name">{commentary.selectedItem.gameName}</div>
-          <div className="comm-head-ddate">04.01</div>
+          <div className="comm-header">
+            <div className="comm-head-game-name">{commentary.selectedItem.gameName}</div>
+            <div className="comm-head-ddate">{`${commentary.selectedItem.ddate.substring(8, 10)}.${commentary.selectedItem.ddate.substring(5, 7)}`}</div>
           </div>
            <div className="comm-head-comment">{commentary.selectedItem.comment}</div>
            <div className="comm-mini-table-row">
@@ -84,4 +92,4 @@ const Commentary = ({closeCallback, commentary, ui, players, loginName, addComme
   );
 };
 
-export default connect(mapStateToProps, {addCommentaryThunk})(Commentary);
+export default connect(mapStateToProps, {addCommentaryThunk, setCommentaryAdd})(Commentary);

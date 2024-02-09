@@ -16,6 +16,10 @@ const mapStateToProps = state => ({
 const Header = ({ ui, reloadFunc, logoutThunk }) => {
   const [showModal, setShowModal] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const logout = () => {
+    logoutThunk();
+    reloadFunc();
+  }
   return (
     <div className="header">
       <div className="site-logo">
@@ -52,13 +56,13 @@ const Header = ({ ui, reloadFunc, logoutThunk }) => {
                   <img className="ava-block" height="50" width="50" src={`data:image/jpg;base64,${ui.ava}`} alt="ava"/>
                   <div className="">{ui.loginName}</div>
                 </div>
-                <div style={{cursor: 'pointer', marginLeft: "32px"}} onClick={logoutThunk}>Выход</div>
+                <div style={{cursor: 'pointer', marginLeft: "32px"}} onClick={logout}>Выход</div>
               </div>
             : <div className="auth-block">
                 <div className="login-btn" onClick={() => setShowLogin(true)}>Войти</div>
               </div>
               }
-          {showLogin && <AuthForm closeCallback={() => setShowLogin(false)}/>}
+          {showLogin && <AuthForm reloadFunc={reloadFunc} closeCallback={() => setShowLogin(false)}/>}
         </div>
 
       </div>
