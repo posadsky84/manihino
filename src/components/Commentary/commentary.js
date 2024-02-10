@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ModalScreen from '../../helpers/modalScreen';
 import "./commentary.css";
 import { connect } from 'react-redux';
@@ -30,6 +30,12 @@ const Commentary = ({closeCallback, commentary, ui, players, loginName, addComme
       commentary.selectedItem.ddate,
     );
   };
+
+  const unreadRef = useRef(null);
+
+  useEffect(() => {
+      if (!commentary.isLoading) unreadRef?.current?.scrollIntoView();
+  }, [commentary.isLoading]);
 
   return (
      <ModalScreen closeCallback={closeCallback} fullScreen>
@@ -65,7 +71,7 @@ const Commentary = ({closeCallback, commentary, ui, players, loginName, addComme
                  <div className="comm-body">{item.commText}</div>
                </div>
              </div>
-             {(index < arr.length - 1) && !!item.lastReadFlag && <div className="comm-unread-block">Непрочитанные сообщения</div>}
+             {(index < arr.length - 1) && !!item.lastReadFlag && <div ref={unreadRef} className="comm-unread-block">Непрочитанные сообщения</div>}
              </>)
            }
            {!commentary.list.length && "Комментариев пока нет..."}

@@ -95,6 +95,7 @@ const initState = {
   allSeasons: [],
   commentary: {
     isModalOpen: false,
+    isLoading: false,
     selectedItem: null,
     list: [],
   },
@@ -138,8 +139,8 @@ const uiReducer = (state = initState, action) => {
           ...initState.commentary,
           selectedItem: action.item,
           isModalOpen: true,
+          isLoading: true,
         },
-
       }
     }
     case SET_COMMENTARY_LIST: {
@@ -148,6 +149,7 @@ const uiReducer = (state = initState, action) => {
         commentary: {
           ...state.commentary,
           list: action.list,
+          isLoading: false,
         },
       }
     }
